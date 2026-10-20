@@ -65,7 +65,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         
         {/* KPI 1: Winner & MP (ECI-Style Frame) */}
-        <div className={`${cardBg} border border-l-4 border-l-emerald-600 rounded-xl p-5 relative overflow-hidden transition-all shadow-xs`}>
+        <div className={`${cardBg} border rounded-xl p-5 relative overflow-hidden transition-all shadow-xs`}>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#20783B]"></div>
           <div className="flex items-center justify-between">
             <span className={`text-[11px] font-sans font-bold uppercase tracking-wider ${textSecondary}`}>
               ELECTED MP ({currentElection.year})
@@ -83,18 +84,19 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
                 {winner?.party}
               </span>
               <span className={textSecondary}>
-                <span className="font-bold text-slate-900 dark:text-white">{winner?.vote_share_percent}%</span> ({winner?.total_votes.toLocaleString()} votes)
+                <span className={`font-bold ${textPrimary}`}>{winner?.vote_share_percent}%</span> ({winner?.total_votes.toLocaleString()} votes)
               </span>
             </div>
           </div>
           <div className={`mt-4 pt-3 border-t ${isDark ? 'border-slate-800' : 'border-slate-200'} flex items-center justify-between text-xs font-sans ${textSecondary}`}>
-            <span>Runner-up: <strong className="text-slate-900 dark:text-white font-semibold">{runnerUp?.party}</strong></span>
-            <span className="font-bold text-slate-900 dark:text-white">{runnerUp?.vote_share_percent}%</span>
+            <span>Runner-up: <strong className={`font-semibold ${textPrimary}`}>{runnerUp?.party}</strong></span>
+            <span className={`font-bold ${textPrimary}`}>{runnerUp?.vote_share_percent}%</span>
           </div>
         </div>
 
         {/* KPI 2: Margin of Victory */}
-        <div className={`${cardBg} border border-l-4 border-l-blue-600 rounded-xl p-5 relative overflow-hidden transition-all shadow-xs`}>
+        <div className={`${cardBg} border rounded-xl p-5 relative overflow-hidden transition-all shadow-xs`}>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#10B981]"></div>
           <div className="flex items-center justify-between">
             <span className={`text-[11px] font-sans font-bold uppercase tracking-wider ${textSecondary}`}>
               VICTORY LEAD MARGIN
@@ -121,7 +123,8 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
         </div>
 
         {/* KPI 3: Turnout & Polled Votes */}
-        <div className={`${cardBg} border border-l-4 border-l-purple-600 rounded-xl p-5 relative overflow-hidden transition-all shadow-xs`}>
+        <div className={`${cardBg} border rounded-xl p-5 relative overflow-hidden transition-all shadow-xs`}>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#8B5CF6]"></div>
           <div className="flex items-center justify-between">
             <span className={`text-[11px] font-sans font-bold uppercase tracking-wider ${textSecondary}`}>
               VOTER TURNOUT
@@ -135,17 +138,18 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
               {currentElection.voter_turnout_percent}%
             </div>
             <div className={`mt-1.5 text-xs font-sans ${textSecondary}`}>
-              <span className="font-semibold text-slate-900 dark:text-white">{currentElection.total_votes_polled.toLocaleString()}</span> votes polled
+              <span className={`font-semibold ${textPrimary}`}>{currentElection.total_votes_polled.toLocaleString()}</span> votes polled
             </div>
           </div>
           <div className={`mt-4 pt-3 border-t ${isDark ? 'border-slate-800' : 'border-slate-200'} flex items-center justify-between text-xs font-sans ${textSecondary}`}>
             <span>Total Electorate</span>
-            <span className="font-bold text-slate-900 dark:text-white">{currentElection.total_electors.toLocaleString()}</span>
+            <span className={`font-bold ${textPrimary}`}>{currentElection.total_electors.toLocaleString()}</span>
           </div>
         </div>
 
         {/* KPI 4: Assembly Segments Grip */}
-        <div className={`${cardBg} border border-l-4 border-l-amber-600 rounded-xl p-5 relative overflow-hidden transition-all shadow-xs`}>
+        <div className={`${cardBg} border rounded-xl p-5 relative overflow-hidden transition-all shadow-xs`}>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#F59E0B]"></div>
           <div className="flex items-center justify-between">
             <span className={`text-[11px] font-sans font-bold uppercase tracking-wider ${textSecondary}`}>
               ASSEMBLY ALIGNMENT
@@ -166,7 +170,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
           </div>
           <div className={`mt-4 pt-3 border-t ${isDark ? 'border-slate-800' : 'border-slate-200'} flex items-center justify-between text-xs font-sans ${textSecondary}`}>
             <span>Core Fortress</span>
-            <span className={`font-bold text-slate-900 dark:text-white`}>Bahadurpura (+1.35L)</span>
+            <span className={`font-bold ${textPrimary}`}>Bahadurpura (+1.35L)</span>
           </div>
         </div>
 

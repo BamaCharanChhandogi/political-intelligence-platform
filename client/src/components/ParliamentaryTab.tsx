@@ -84,30 +84,34 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
         </div>
       </div>
 
-      {/* Aggregate Metrics Bar (ECI-Style Colored Accent Frames) */}
+      {/* Aggregate Metrics Bar (ECI-Style Frames) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className={`border border-l-4 border-l-blue-600 rounded-xl p-4 transition-colors ${cardBg}`}>
+        <div className={`border rounded-xl p-4 relative overflow-hidden transition-colors ${cardBg}`}>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#3B82F6]"></div>
           <div className={`text-[11px] font-sans font-bold uppercase tracking-wider ${textSecondary}`}>Total Electors</div>
           <div className={`text-2xl font-bold font-sans tracking-tight tabular-nums mt-1.5 ${textPrimary}`}>
             {currentElection.total_electors.toLocaleString()}
           </div>
         </div>
-        <div className={`border border-l-4 border-l-purple-600 rounded-xl p-4 transition-colors ${cardBg}`}>
+        <div className={`border rounded-xl p-4 relative overflow-hidden transition-colors ${cardBg}`}>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#8B5CF6]"></div>
           <div className={`text-[11px] font-sans font-bold uppercase tracking-wider ${textSecondary}`}>Votes Polled (Turnout)</div>
           <div className={`text-2xl font-bold font-sans tracking-tight tabular-nums mt-1.5 ${textPrimary}`}>
-            {currentElection.total_votes_polled.toLocaleString()} <span className="text-xs font-bold text-slate-600 dark:text-slate-400 font-sans">({currentElection.voter_turnout_percent}%)</span>
+            {currentElection.total_votes_polled.toLocaleString()} <span className={`text-xs font-bold ${textSecondary}`}>({currentElection.voter_turnout_percent}%)</span>
           </div>
         </div>
-        <div className={`border border-l-4 border-l-emerald-600 rounded-xl p-4 transition-colors ${cardBg}`}>
+        <div className={`border rounded-xl p-4 relative overflow-hidden transition-colors ${cardBg}`}>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#10B981]"></div>
           <div className={`text-[11px] font-sans font-bold uppercase tracking-wider ${textSecondary}`}>Winning Margin</div>
-          <div className="text-2xl font-bold font-sans tracking-tight tabular-nums text-emerald-600 dark:text-emerald-400 mt-1.5">
-            +{currentElection.winning_margin.toLocaleString()} <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400/90 font-sans">({currentElection.winning_margin_percent}%)</span>
+          <div className={`text-2xl font-bold font-sans tracking-tight tabular-nums ${isDark ? 'text-emerald-400' : 'text-emerald-700'} mt-1.5`}>
+            +{currentElection.winning_margin.toLocaleString()} <span className={`text-xs font-bold ${isDark ? 'text-emerald-400/90' : 'text-emerald-800'}`}>({currentElection.winning_margin_percent}%)</span>
           </div>
         </div>
-        <div className={`border border-l-4 border-l-rose-500 rounded-xl p-4 transition-colors ${cardBg}`}>
+        <div className={`border rounded-xl p-4 relative overflow-hidden transition-colors ${cardBg}`}>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#F43F5E]"></div>
           <div className={`text-[11px] font-sans font-bold uppercase tracking-wider ${textSecondary}`}>NOTA Votes</div>
           <div className={`text-2xl font-bold font-sans tracking-tight tabular-nums mt-1.5 ${textPrimary}`}>
-            {currentElection.nota_votes.toLocaleString()} <span className="text-xs font-bold text-slate-600 dark:text-slate-400 font-sans">({currentElection.nota_percent}%)</span>
+            {currentElection.nota_votes.toLocaleString()} <span className={`text-xs font-bold ${textSecondary}`}>({currentElection.nota_percent}%)</span>
           </div>
         </div>
       </div>

@@ -105,7 +105,8 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
 
       {/* Primary Demographic Metric Cards (ECI-Style Frames) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className={`border border-l-4 border-l-blue-600 rounded-xl p-4 transition-colors ${cardBg}`}>
+        <div className={`border rounded-xl p-4 relative overflow-hidden transition-colors ${cardBg}`}>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#3B82F6]"></div>
           <div className={`flex items-center justify-between ${textSecondary} text-xs font-sans font-bold uppercase`}>
             <span>Census Population</span>
             <Users className="h-4 w-4 text-blue-500" />
@@ -119,12 +120,13 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
           </div>
         </div>
 
-        <div className={`border border-l-4 border-l-emerald-600 rounded-xl p-4 transition-colors ${cardBg}`}>
+        <div className={`border rounded-xl p-4 relative overflow-hidden transition-colors ${cardBg}`}>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#10B981]"></div>
           <div className={`flex items-center justify-between ${textSecondary} text-xs font-sans font-bold uppercase`}>
             <span>Literacy Rate</span>
             <BookOpen className="h-4 w-4 text-emerald-500" />
           </div>
-          <div className="text-2xl font-bold font-sans tracking-tight tabular-nums text-emerald-600 dark:text-emerald-400 mt-2">
+          <div className={`text-2xl font-bold font-sans tracking-tight tabular-nums ${isDark ? 'text-emerald-400' : 'text-emerald-700'} mt-2`}>
             {demographics.literacy_rate}%
           </div>
           <div className={`text-[11px] font-sans font-medium ${textSecondary} mt-1 flex justify-between`}>
@@ -133,12 +135,13 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
           </div>
         </div>
 
-        <div className={`border border-l-4 border-l-purple-600 rounded-xl p-4 transition-colors ${cardBg}`}>
+        <div className={`border rounded-xl p-4 relative overflow-hidden transition-colors ${cardBg}`}>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#8B5CF6]"></div>
           <div className={`flex items-center justify-between ${textSecondary} text-xs font-sans font-bold uppercase`}>
             <span>Sex Ratio</span>
             <HeartHandshake className="h-4 w-4 text-purple-500" />
           </div>
-          <div className="text-2xl font-bold font-sans tracking-tight tabular-nums text-purple-600 dark:text-purple-400 mt-2">
+          <div className={`text-2xl font-bold font-sans tracking-tight tabular-nums ${isDark ? 'text-purple-400' : 'text-purple-700'} mt-2`}>
             {demographics.sex_ratio}
           </div>
           <div className={`text-[11px] font-sans font-medium ${textSecondary} mt-1`}>
@@ -146,12 +149,13 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
           </div>
         </div>
 
-        <div className={`border border-l-4 border-l-amber-600 rounded-xl p-4 transition-colors ${cardBg}`}>
+        <div className={`border rounded-xl p-4 relative overflow-hidden transition-colors ${cardBg}`}>
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#F59E0B]"></div>
           <div className={`flex items-center justify-between ${textSecondary} text-xs font-sans font-bold uppercase`}>
             <span>Density (per km²)</span>
             <Building className="h-4 w-4 text-amber-500" />
           </div>
-          <div className="text-2xl font-bold font-sans tracking-tight tabular-nums text-amber-600 dark:text-amber-400 mt-2">
+          <div className={`text-2xl font-bold font-sans tracking-tight tabular-nums ${isDark ? 'text-amber-400' : 'text-amber-700'} mt-2`}>
             {demographics.population_density_per_sq_km.toLocaleString()}
           </div>
           <div className={`text-[11px] font-sans font-medium ${textSecondary} mt-1`}>

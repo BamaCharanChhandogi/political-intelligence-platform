@@ -25,6 +25,17 @@ export function App() {
   const [selectedYear, setSelectedYear] = useState<number>(2024);
   const [isDark, setIsDark] = useState<boolean>(true);
 
+  // Synchronize document class and attribute with isDark
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  }, [isDark]);
+
   // States with fallback initialization
   const [elections, setElections] = useState<ParliamentaryElection[]>(fallbackElections as ParliamentaryElection[]);
   const [assemblySegments, setAssemblySegments] = useState<AssemblySegment[]>(fallbackSegments as AssemblySegment[]);
