@@ -44,7 +44,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-50 py-2.5 sm:py-3.5 px-3 sm:px-6 lg:px-8 print:hidden">
+    <header className={`sticky top-0 z-50 w-full backdrop-blur-xl border-b transition-colors py-2.5 sm:py-3 px-3 sm:px-6 lg:px-8 print:hidden ${
+      isDark 
+        ? 'bg-[#090D16]/85 border-slate-800/80 shadow-lg shadow-black/20' 
+        : 'bg-white/85 border-slate-200/80 shadow-sm shadow-slate-200/50'
+    }`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
         
         {/* LEFT: Clean Minimalist Title "Hyderabad • 18th Lok Sabha" */}
