@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ParliamentaryElection } from '../types';
 import { 
   Trophy, 
   Calendar, 
   Vote, 
-  Percent, 
-  ArrowUpRight, 
-  CheckCircle2, 
-  Filter
+  Percent
 } from 'lucide-react';
 import { 
   ResponsiveContainer, 
@@ -21,12 +18,14 @@ interface ParliamentaryTabProps {
   elections: ParliamentaryElection[];
   selectedYear: number;
   onSelectYear: (year: number) => void;
+  isDark: boolean;
 }
 
 export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
   elections,
   selectedYear,
   onSelectYear,
+  isDark,
 }) => {
   const currentElection = elections.find(e => e.year === selectedYear) || elections[0];
 
@@ -37,29 +36,49 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
     color: c.party_color || '#94A3B8'
   }));
 
+  const cardBg = isDark ? 'bg-[#0F172A] border-slate-800' : 'bg-white border-slate-200 shadow-xs';
+  const textPrimary = isDark ? 'text-white' : 'text-slate-900';
+  const textSecondary = isDark ? 'text-slate-400' : 'text-slate-600';
+  const textMuted = isDark ? 'text-slate-500' : 'text-slate-400';
+  const pillBg = isDark ? 'bg-slate-900 border-slate-800' : 'bg-slate-100 border-slate-200';
+  const tableHover = isDark ? 'hover:bg-slate-800/30' : 'hover:bg-slate-50';
+  const tableDivide = isDark ? 'divide-slate-800/60' : 'divide-slate-100';
+  const tableBorder = isDark ? 'border-slate-800 text-slate-400' : 'border-slate-200 text-slate-600';
+  const winnerRowBg = isDark ? 'bg-emerald-950/20' : 'bg-emerald-50/40';
+  const tooltipBg = isDark ? '#090D16' : '#FFFFFF';
+  const tooltipBorder = isDark ? '#334155' : '#E2E8F0';
+
+  // Format date helper to remove raw timestamps like 00:00:00.000Z
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return '';
+    return dateStr.split('T')[0];
+  };
+
   return (
     <div className="space-y-6">
       
       {/* Election Header Bar & Year Switcher */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 bg-[#0F172A] border border-slate-800 p-5 rounded-xl">
+      <div className={`flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border p-5 rounded-xl transition-colors ${cardBg}`}>
         <div>
           <div className="flex items-center space-x-2">
-            <h2 className="text-lg font-bold text-white tracking-tight">
+            <h2 className={`text-lg font-bold font-sans tracking-tight ${textPrimary}`}>
               {currentElection.year} Parliamentary Election Results
             </h2>
-            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20">
+            <span className={`px-2 py-0.5 rounded text-[10px] font-sans font-semibold border ${
+              isDark ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-blue-50 text-blue-700 border-blue-200'
+            }`}>
               LOK SABHA
             </span>
           </div>
-          <p className="text-xs text-slate-400 mt-1">
-            Polling Date: {currentElection.election_date} • Counting Date: {currentElection.counting_date}
+          <p className={`text-xs font-sans mt-1 ${textSecondary}`}>
+            Polling Date: {formatDate(currentElection.election_date)} • Counting Date: {formatDate(currentElection.counting_date)}
           </p>
         </div>
 
         {/* Year Pills */}
-        <div className="flex items-center space-x-2 bg-slate-900 p-1.5 rounded-lg border border-slate-800">
-          <Calendar className="h-4 w-4 text-slate-400 ml-2" />
-          <span className="text-xs text-slate-400 mr-2 font-mono">SELECT:</span>
+        <div className={`flex items-center space-x-2 p-1.5 rounded-lg border ${pillBg}`}>
+          <Calendar className={`h-4 w-4 ml-2 ${textSecondary}`} />
+          <span className={`text-xs mr-2 font-sans font-medium ${textSecondary}`}>SELECT:</span>
           {elections.map(e => (
             <button
               key={e.year}
@@ -67,7 +86,9 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
               className={`px-3 py-1 text-xs font-mono rounded-md transition-all ${
                 selectedYear === e.year
                   ? 'bg-blue-600 text-white font-semibold shadow'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800'
+                  : isDark 
+                    ? 'text-slate-400 hover:text-slate-200 hover:bg-slate-800' 
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200'
               }`}
             >
               {e.year}
@@ -78,28 +99,28 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
 
       {/* Aggregate Metrics Bar */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-[#0F172A] border border-slate-800 rounded-lg p-3">
-          <div className="text-[11px] font-mono text-slate-400 uppercase">Total Electors</div>
-          <div className="text-lg font-bold font-mono text-white mt-1">
+        <div className={`border rounded-xl p-4 transition-colors ${cardBg}`}>
+          <div className={`text-[11px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>Total Electors</div>
+          <div className={`text-xl font-bold font-mono mt-1.5 ${textPrimary}`}>
             {currentElection.total_electors.toLocaleString()}
           </div>
         </div>
-        <div className="bg-[#0F172A] border border-slate-800 rounded-lg p-3">
-          <div className="text-[11px] font-mono text-slate-400 uppercase">Votes Polled (Turnout)</div>
-          <div className="text-lg font-bold font-mono text-white mt-1">
-            {currentElection.total_votes_polled.toLocaleString()} ({currentElection.voter_turnout_percent}%)
+        <div className={`border rounded-xl p-4 transition-colors ${cardBg}`}>
+          <div className={`text-[11px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>Votes Polled (Turnout)</div>
+          <div className={`text-xl font-bold font-mono mt-1.5 ${textPrimary}`}>
+            {currentElection.total_votes_polled.toLocaleString()} <span className="text-sm font-normal text-slate-400">({currentElection.voter_turnout_percent}%)</span>
           </div>
         </div>
-        <div className="bg-[#0F172A] border border-slate-800 rounded-lg p-3">
-          <div className="text-[11px] font-mono text-slate-400 uppercase">Winning Margin</div>
-          <div className="text-lg font-bold font-mono text-emerald-400 mt-1">
-            +{currentElection.winning_margin.toLocaleString()} ({currentElection.winning_margin_percent}%)
+        <div className={`border rounded-xl p-4 transition-colors ${cardBg}`}>
+          <div className={`text-[11px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>Winning Margin</div>
+          <div className="text-xl font-bold font-mono text-emerald-500 mt-1.5">
+            +{currentElection.winning_margin.toLocaleString()} <span className="text-sm font-normal text-emerald-500/80">({currentElection.winning_margin_percent}%)</span>
           </div>
         </div>
-        <div className="bg-[#0F172A] border border-slate-800 rounded-lg p-3">
-          <div className="text-[11px] font-mono text-slate-400 uppercase">NOTA Votes</div>
-          <div className="text-lg font-bold font-mono text-slate-300 mt-1">
-            {currentElection.nota_votes.toLocaleString()} ({currentElection.nota_percent}%)
+        <div className={`border rounded-xl p-4 transition-colors ${cardBg}`}>
+          <div className={`text-[11px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>NOTA Votes</div>
+          <div className={`text-xl font-bold font-mono mt-1.5 ${textPrimary}`}>
+            {currentElection.nota_votes.toLocaleString()} <span className="text-sm font-normal text-slate-400">({currentElection.nota_percent}%)</span>
           </div>
         </div>
       </div>
@@ -108,16 +129,16 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Detailed Table (2 Cols) */}
-        <div className="lg:col-span-2 bg-[#0F172A] border border-slate-800 rounded-xl p-5 shadow-xl">
-          <h3 className="text-sm font-semibold text-white tracking-tight mb-4 flex items-center space-x-2">
-            <Vote className="h-4 w-4 text-blue-400" />
+        <div className={`lg:col-span-2 border rounded-xl p-5 shadow-sm transition-colors ${cardBg}`}>
+          <h3 className={`text-sm font-semibold font-sans tracking-tight mb-4 flex items-center space-x-2 ${textPrimary}`}>
+            <Vote className="h-4 w-4 text-blue-500" />
             <span>Candidate-Level Vote Breakdown & Performance</span>
           </h3>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-800 text-slate-400 font-mono text-[11px]">
+                <tr className={`border-b font-sans text-[11px] ${tableBorder}`}>
                   <th className="pb-3 font-semibold">POS</th>
                   <th className="pb-3 font-semibold">CANDIDATE</th>
                   <th className="pb-3 font-semibold">PARTY</th>
@@ -127,24 +148,26 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
                   <th className="pb-3 font-semibold text-right">VOTE SHARE</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 font-mono">
+              <tbody className={`divide-y font-mono ${tableDivide}`}>
                 {currentElection.candidates.map((candidate) => (
-                  <tr key={candidate.name} className={`hover:bg-slate-800/30 transition-colors ${candidate.is_winner ? 'bg-emerald-950/20' : ''}`}>
+                  <tr key={candidate.name} className={`${tableHover} transition-colors ${candidate.is_winner ? winnerRowBg : ''}`}>
                     <td className="py-3.5">
                       {candidate.is_winner ? (
-                        <span className="flex items-center space-x-1 text-emerald-400 font-bold">
+                        <span className="flex items-center space-x-1 text-emerald-500 font-bold">
                           <Trophy className="h-3.5 w-3.5" />
                           <span>1</span>
                         </span>
                       ) : (
-                        <span className="text-slate-400">{candidate.position}</span>
+                        <span className={textSecondary}>{candidate.position}</span>
                       )}
                     </td>
-                    <td className="py-3.5 font-sans font-medium text-white">
+                    <td className={`py-3.5 font-sans font-medium ${textPrimary}`}>
                       <div className="flex items-center space-x-2">
                         <span>{candidate.name}</span>
                         {candidate.is_winner && (
-                          <span className="text-[10px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30">
+                          <span className={`text-[10px] px-1.5 py-0.2 rounded font-sans font-semibold border ${
+                            isDark ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30' : 'bg-emerald-100 text-emerald-800 border-emerald-200'
+                          }`}>
                             ELECTED
                           </span>
                         )}
@@ -152,21 +175,20 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
                     </td>
                     <td className="py-3.5">
                       <span 
-                        className="px-2 py-0.5 rounded text-[10px] font-semibold"
+                        className="px-2 py-0.5 rounded text-[10px] font-sans font-semibold border"
                         style={{ 
-                          backgroundColor: `${candidate.party_color}20`,
+                          backgroundColor: `${candidate.party_color}15`,
                           color: candidate.party_color,
-                          borderColor: `${candidate.party_color}40`,
-                          borderWidth: '1px'
+                          borderColor: `${candidate.party_color}35`
                         }}
                       >
                         {candidate.party}
                       </span>
                     </td>
-                    <td className="py-3.5 text-right text-slate-300">{candidate.evm_votes.toLocaleString()}</td>
-                    <td className="py-3.5 text-right text-slate-400">{candidate.postal_votes.toLocaleString()}</td>
-                    <td className="py-3.5 text-right font-semibold text-white">{candidate.total_votes.toLocaleString()}</td>
-                    <td className="py-3.5 text-right font-semibold text-blue-400">{candidate.vote_share_percent}%</td>
+                    <td className={`py-3.5 text-right ${textSecondary}`}>{candidate.evm_votes.toLocaleString()}</td>
+                    <td className={`py-3.5 text-right ${textMuted}`}>{candidate.postal_votes.toLocaleString()}</td>
+                    <td className={`py-3.5 text-right font-semibold ${textPrimary}`}>{candidate.total_votes.toLocaleString()}</td>
+                    <td className="py-3.5 text-right font-semibold text-blue-500">{candidate.vote_share_percent}%</td>
                   </tr>
                 ))}
               </tbody>
@@ -175,13 +197,13 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
         </div>
 
         {/* Vote Share Donut Visual (1 Col) */}
-        <div className="bg-[#0F172A] border border-slate-800 rounded-xl p-5 shadow-xl flex flex-col justify-between">
+        <div className={`border rounded-xl p-5 shadow-sm flex flex-col justify-between transition-colors ${cardBg}`}>
           <div>
-            <h3 className="text-sm font-semibold text-white tracking-tight mb-1 flex items-center space-x-2">
-              <Percent className="h-4 w-4 text-emerald-400" />
+            <h3 className={`text-sm font-semibold font-sans tracking-tight mb-1 flex items-center space-x-2 ${textPrimary}`}>
+              <Percent className="h-4 w-4 text-emerald-500" />
               <span>Vote Share Distribution</span>
             </h3>
-            <p className="text-xs text-slate-400">{currentElection.year} Lok Sabha Election</p>
+            <p className={`text-xs font-sans ${textSecondary}`}>{currentElection.year} Lok Sabha Election</p>
             
             <div className="h-60 w-full mt-4">
               <ResponsiveContainer width="100%" height="100%">
@@ -200,7 +222,7 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
                     ))}
                   </Pie>
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#090D16', borderColor: '#334155', borderRadius: '8px', fontSize: '12px' }}
+                    contentStyle={{ backgroundColor: tooltipBg, borderColor: tooltipBorder, borderRadius: '8px', fontSize: '12px' }}
                     formatter={(value: any, name: any) => [`${value}%`, name]}
                   />
                 </PieChart>
@@ -208,16 +230,16 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
             </div>
           </div>
 
-          <div className="space-y-2 mt-4 pt-3 border-t border-slate-800">
+          <div className={`space-y-2 mt-4 pt-3 border-t ${isDark ? 'border-slate-800' : 'border-slate-100'}`}>
             {pieData.map((item) => (
-              <div key={item.name} className="flex items-center justify-between text-xs">
+              <div key={item.name} className="flex items-center justify-between text-xs font-sans">
                 <div className="flex items-center space-x-2">
                   <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: item.color }}></span>
-                  <span className="text-slate-300 truncate max-w-[140px]">{item.name}</span>
+                  <span className={`truncate max-w-[140px] ${textSecondary}`}>{item.name}</span>
                 </div>
-                <div className="font-mono text-slate-400">
-                  <span className="font-semibold text-white">{item.value}%</span>
-                  <span className="text-[10px] ml-1">({item.votes.toLocaleString()})</span>
+                <div className="font-mono">
+                  <span className={`font-semibold ${textPrimary}`}>{item.value}%</span>
+                  <span className={`text-[10px] ml-1 ${textMuted}`}>({item.votes.toLocaleString()})</span>
                 </div>
               </div>
             ))}

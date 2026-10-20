@@ -103,18 +103,21 @@ export function App() {
             elections={elections}
             selectedYear={selectedYear}
             onSelectYear={setSelectedYear}
+            isDark={isDark}
           />
         )}
 
         {activeTab === 'assembly' && (
           <AssemblyTab
             segments={assemblySegments}
+            isDark={isDark}
           />
         )}
 
         {activeTab === 'demographics' && (
           <DemographicsTab
             demographics={demographics}
+            isDark={isDark}
           />
         )}
 
@@ -122,6 +125,7 @@ export function App() {
           <InsightsTab
             insights={insights}
             swings={swings}
+            isDark={isDark}
           />
         )}
       </main>
