@@ -5,7 +5,6 @@ import { OverviewTab } from './components/OverviewTab';
 import { ParliamentaryTab } from './components/ParliamentaryTab';
 import { AssemblyTab } from './components/AssemblyTab';
 import { DemographicsTab } from './components/DemographicsTab';
-import { InsightsTab } from './components/InsightsTab';
 
 // Fallback embedded datasets (ensures flawless standalone execution without network dependency)
 import fallbackElections from './data/parliamentary_elections.json';
@@ -76,7 +75,7 @@ export function App() {
       isDark ? 'bg-[#090D16] text-slate-100' : 'bg-[#F8FAFC] text-slate-900'
     }`}>
       
-      {/* Top Navigation Bar with Dark/Light Toggle */}
+      {/* Top Navigation Bar with Single Authoritative Year Controller */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -102,7 +101,6 @@ export function App() {
           <ParliamentaryTab
             elections={elections}
             selectedYear={selectedYear}
-            onSelectYear={setSelectedYear}
             isDark={isDark}
           />
         )}
@@ -110,6 +108,7 @@ export function App() {
         {activeTab === 'assembly' && (
           <AssemblyTab
             segments={assemblySegments}
+            selectedYear={selectedYear}
             isDark={isDark}
           />
         )}
@@ -117,14 +116,9 @@ export function App() {
         {activeTab === 'demographics' && (
           <DemographicsTab
             demographics={demographics}
-            isDark={isDark}
-          />
-        )}
-
-        {activeTab === 'insights' && (
-          <InsightsTab
             insights={insights}
             swings={swings}
+            selectedYear={selectedYear}
             isDark={isDark}
           />
         )}

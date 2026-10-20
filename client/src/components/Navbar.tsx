@@ -2,10 +2,8 @@ import React from 'react';
 import { 
   Building2, 
   MapPin, 
-  Search, 
   BarChart3, 
   Calendar, 
-  Sparkles,
   Sun,
   Moon,
   Printer
@@ -32,9 +30,15 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'overview', label: 'Executive Intelligence', icon: BarChart3 },
     { id: 'parliamentary', label: 'Lok Sabha Results', icon: Calendar },
     { id: 'assembly', label: 'Assembly Segments', icon: Building2 },
-    { id: 'demographics', label: 'Demographic Profile', icon: MapPin },
-    { id: 'insights', label: 'Strategic Insights', icon: Sparkles },
+    { id: 'demographics', label: 'Demographics & Strategy', icon: MapPin },
   ];
+
+  const yearMetadata: Record<number, string> = {
+    2024: '18th Lok Sabha • May 2024',
+    2019: '17th Lok Sabha • April 2019',
+    2014: '16th Lok Sabha • April 2014',
+    2009: '15th Lok Sabha • April 2009',
+  };
 
   return (
     <header className={`sticky top-0 z-50 border-b backdrop-blur-md transition-colors ${
@@ -60,52 +64,46 @@ export const Navbar: React.FC<NavbarProps> = ({
                     ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' 
                     : 'bg-blue-50 text-blue-700 border-blue-200'
                 }`}>
-                  STRATEGIC
+                  ENTERPRISE
                 </span>
               </div>
               <p className={`text-[11px] font-sans tracking-wide ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
-                HYDERABAD PARLIAMENTARY CONSTITUENCY
+                HYDERABAD PC (TELANGANA) • <span className="font-mono text-blue-500 font-medium">{yearMetadata[selectedYear]}</span>
               </p>
             </div>
           </div>
 
-          {/* Quick Year Pill Selector */}
-          <div className={`hidden md:flex items-center space-x-1 p-1 rounded-lg border ${
-            isDark ? 'bg-slate-900/90 border-slate-800' : 'bg-slate-100 border-slate-200'
-          }`}>
-            {[2024, 2019, 2014, 2009].map((year) => (
-              <button
-                key={year}
-                onClick={() => setSelectedYear(year)}
-                className={`px-3 py-1 text-xs rounded-md transition-all font-mono ${
-                  selectedYear === year
-                    ? 'bg-blue-600 text-white shadow-sm font-semibold'
-                    : isDark 
-                      ? 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60' 
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-                }`}
-              >
-                {year}
-              </button>
-            ))}
+          {/* Primary & ONLY Authoritative Year Controller */}
+          <div className="flex items-center space-x-2">
+            <div className={`flex items-center space-x-1 p-1 rounded-lg border ${
+              isDark ? 'bg-slate-900/90 border-slate-800' : 'bg-slate-100 border-slate-200'
+            }`}>
+              <div className={`px-2 py-1 text-[11px] font-sans font-semibold uppercase tracking-wider hidden sm:block ${
+                isDark ? 'text-slate-400' : 'text-slate-500'
+              }`}>
+                CYCLE:
+              </div>
+              {[2024, 2019, 2014, 2009].map((year) => (
+                <button
+                  key={year}
+                  onClick={() => setSelectedYear(year)}
+                  className={`px-3 py-1 text-xs rounded-md transition-all font-mono ${
+                    selectedYear === year
+                      ? 'bg-blue-600 text-white shadow-sm font-semibold'
+                      : isDark 
+                        ? 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60' 
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200'
+                  }`}
+                >
+                  {year}
+                </button>
+              ))}
+            </div>
           </div>
 
-          {/* Controls: Mode Toggle, Print, ECI Badge */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
+          {/* Controls: Mode Toggle, Print */}
+          <div className="flex items-center space-x-2">
             
-            {/* ECI Certified Indicator */}
-            <div className={`hidden lg:flex items-center space-x-2 text-xs font-sans px-2.5 py-1 rounded-full border ${
-              isDark 
-                ? 'text-emerald-400 bg-emerald-950/40 border-emerald-800/40' 
-                : 'text-emerald-700 bg-emerald-50 border-emerald-200'
-            }`}>
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="font-medium tracking-wide">ECI DATA AUDITED</span>
-            </div>
-
             {/* Print / Report Mode Button */}
             <button
               onClick={() => window.print()}
@@ -157,7 +155,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center space-x-2 px-3 py-1.5 rounded-md text-xs font-sans font-medium whitespace-nowrap transition-all ${
+                className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-md text-xs font-sans font-medium whitespace-nowrap transition-all ${
                   isActive
                     ? isDark 
                       ? 'bg-gradient-to-r from-blue-600/20 to-indigo-600/20 text-blue-400 border border-blue-500/30 font-semibold' 

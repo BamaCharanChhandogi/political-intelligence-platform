@@ -2,7 +2,6 @@ import React from 'react';
 import { ParliamentaryElection } from '../types';
 import { 
   Trophy, 
-  Calendar, 
   Vote, 
   Percent
 } from 'lucide-react';
@@ -17,14 +16,12 @@ import {
 interface ParliamentaryTabProps {
   elections: ParliamentaryElection[];
   selectedYear: number;
-  onSelectYear: (year: number) => void;
   isDark: boolean;
 }
 
 export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
   elections,
   selectedYear,
-  onSelectYear,
   isDark,
 }) => {
   const currentElection = elections.find(e => e.year === selectedYear) || elections[0];
@@ -40,7 +37,6 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
   const textPrimary = isDark ? 'text-white' : 'text-slate-900';
   const textSecondary = isDark ? 'text-slate-400' : 'text-slate-600';
   const textMuted = isDark ? 'text-slate-500' : 'text-slate-400';
-  const pillBg = isDark ? 'bg-slate-900 border-slate-800' : 'bg-slate-100 border-slate-200';
   const tableHover = isDark ? 'hover:bg-slate-800/30' : 'hover:bg-slate-50';
   const tableDivide = isDark ? 'divide-slate-800/60' : 'divide-slate-100';
   const tableBorder = isDark ? 'border-slate-800 text-slate-400' : 'border-slate-200 text-slate-600';
@@ -48,7 +44,6 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
   const tooltipBg = isDark ? '#090D16' : '#FFFFFF';
   const tooltipBorder = isDark ? '#334155' : '#E2E8F0';
 
-  // Format date helper to remove raw timestamps like 00:00:00.000Z
   const formatDate = (dateStr: string) => {
     if (!dateStr) return '';
     return dateStr.split('T')[0];
@@ -57,11 +52,11 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
   return (
     <div className="space-y-6">
       
-      {/* Election Header Bar & Year Switcher */}
-      <div className={`flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border p-5 rounded-xl transition-colors ${cardBg}`}>
+      {/* Clean Single Context Header */}
+      <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-2 border p-5 rounded-xl transition-colors ${cardBg}`}>
         <div>
           <div className="flex items-center space-x-2">
-            <h2 className={`text-lg font-bold font-sans tracking-tight ${textPrimary}`}>
+            <h2 className={`text-xl font-bold font-sans tracking-tight ${textPrimary}`}>
               {currentElection.year} Parliamentary Election Results
             </h2>
             <span className={`px-2 py-0.5 rounded text-[10px] font-sans font-semibold border ${
@@ -71,29 +66,21 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
             </span>
           </div>
           <p className={`text-xs font-sans mt-1 ${textSecondary}`}>
-            Polling Date: {formatDate(currentElection.election_date)} • Counting Date: {formatDate(currentElection.counting_date)}
+            Official Returns • Polling Date: {formatDate(currentElection.election_date)} • Counting Date: {formatDate(currentElection.counting_date)}
           </p>
         </div>
 
-        {/* Year Pills */}
-        <div className={`flex items-center space-x-2 p-1.5 rounded-lg border ${pillBg}`}>
-          <Calendar className={`h-4 w-4 ml-2 ${textSecondary}`} />
-          <span className={`text-xs mr-2 font-sans font-medium ${textSecondary}`}>SELECT:</span>
-          {elections.map(e => (
-            <button
-              key={e.year}
-              onClick={() => onSelectYear(e.year)}
-              className={`px-3 py-1 text-xs font-mono rounded-md transition-all ${
-                selectedYear === e.year
-                  ? 'bg-blue-600 text-white font-semibold shadow'
-                  : isDark 
-                    ? 'text-slate-400 hover:text-slate-200 hover:bg-slate-800' 
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200'
-              }`}
-            >
-              {e.year}
-            </button>
-          ))}
+        <div className="flex items-center space-x-2 text-xs font-sans">
+          <span className={`px-2.5 py-1 rounded-lg border font-medium ${
+            isDark ? 'bg-emerald-950/40 text-emerald-300 border-emerald-800/40' : 'bg-emerald-50 text-emerald-800 border-emerald-200'
+          }`}>
+            Winner: {currentElection.winner_party}
+          </span>
+          <span className={`px-2.5 py-1 rounded-lg border font-mono ${
+            isDark ? 'bg-slate-900 border-slate-800 text-slate-300' : 'bg-slate-100 border-slate-200 text-slate-700'
+          }`}>
+            Lead: +{currentElection.winning_margin.toLocaleString()}
+          </span>
         </div>
       </div>
 
