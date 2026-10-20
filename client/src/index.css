@@ -11,24 +11,30 @@
   --color-brand-accent: #3B82F6;
 }
 
+/* Reserve scrollbar gutter so page layout NEVER jumps or shakes between tabs of different heights */
+html {
+  scrollbar-gutter: stable;
+  overflow-y: scroll;
+}
+
 body {
   font-family: var(--font-sans);
   background-color: #090D16;
   color: #F8FAFC;
 }
 
-/* Custom scrollbars for clean dashboard finish */
+/* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #090D16;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #334155;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #475569;
 }

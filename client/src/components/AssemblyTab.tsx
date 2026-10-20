@@ -96,7 +96,7 @@ export const AssemblyTab: React.FC<AssemblyTabProps> = ({ segments, selectedYear
               <h2 className={`text-lg font-bold font-sans tracking-tight ${textPrimary}`}>
                 Assembly Constituencies (AC) Retrospective Analysis ({selectedYear})
               </h2>
-              <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-semibold border ${
+              <span className={`px-2 py-0.5 rounded text-[10px] font-sans font-bold border ${
                 isDark ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-blue-50 text-blue-700 border-blue-200'
               }`}>
                 7 AC SEGMENTS
@@ -139,7 +139,7 @@ export const AssemblyTab: React.FC<AssemblyTabProps> = ({ segments, selectedYear
             <BarChart data={leadChartData} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
               <CartesianGrid strokeDasharray="3 3" stroke={gridStroke} vertical={false} />
               <XAxis dataKey="name" stroke="#94A3B8" fontSize={11} tickLine={false} interval={0} angle={-15} textAnchor="end" />
-              <YAxis stroke="#94A3B8" fontSize={11} tickLine={false} tickFormatter={(val) => `${(val / 1000).toFixed(0)}k`} fontFamily="monospace" />
+              <YAxis stroke="#94A3B8" fontSize={11} tickLine={false} tickFormatter={(val) => `${(val / 1000).toFixed(0)}k`} />
               <Tooltip 
                 contentStyle={{ backgroundColor: tooltipBg, borderColor: tooltipBorder, borderRadius: '8px', fontSize: '12px' }}
                 itemStyle={{ color: isDark ? '#F8FAFC' : '#0F172A' }}
@@ -155,50 +155,53 @@ export const AssemblyTab: React.FC<AssemblyTabProps> = ({ segments, selectedYear
       {/* Interactive Segment Deep-Dive Cards & Selector Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        {/* Left List of Segments */}
-        <div className="lg:col-span-1 space-y-2">
-          <div className={`text-xs font-sans font-semibold uppercase tracking-wider mb-2 ${textSecondary}`}>
-            SELECT ASSEMBLY CONSTITUENCY ({selectedYear}):
+        {/* Left List of Segments: Swipeable horizontal chips on mobile, vertical sidebar on desktop */}
+        <div className="lg:col-span-1">
+          <div className={`text-xs font-sans font-semibold uppercase tracking-wider mb-2 flex items-center justify-between ${textSecondary}`}>
+            <span>SELECT ASSEMBLY CONSTITUENCY ({selectedYear}):</span>
+            <span className="lg:hidden text-[10px] font-normal text-blue-500">Swipe ↔</span>
           </div>
-          {segments.map((seg) => {
-            const isSelected = selectedSegment.ac_no === seg.ac_no;
-            const isAIMIM = seg.leading_party_2024 === 'AIMIM';
-            const dynamicLead = Math.round(seg.lead_margin_2024 * mult);
+          <div className="flex lg:flex-col overflow-x-auto lg:overflow-visible gap-2 pb-2 lg:pb-0">
+            {segments.map((seg) => {
+              const isSelected = selectedSegment.ac_no === seg.ac_no;
+              const isAIMIM = seg.leading_party_2024 === 'AIMIM';
+              const dynamicLead = Math.round(seg.lead_margin_2024 * mult);
 
-            return (
-              <button
-                key={seg.ac_no}
-                onClick={() => setSelectedSegment(seg)}
-                className={`w-full text-left p-3.5 rounded-xl border transition-all ${
-                  isSelected 
-                    ? isDark 
-                      ? 'bg-slate-800/80 border-blue-500 shadow-md ring-1 ring-blue-500/50' 
-                      : 'bg-blue-50/80 border-blue-500 shadow-xs ring-1 ring-blue-500/30'
-                    : isDark 
-                      ? 'bg-[#0F172A] border-slate-800/80 hover:border-slate-700 hover:bg-slate-800/40' 
-                      : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <span className={`font-mono text-xs ${textMuted}`}>#{seg.ac_no}</span>
-                    <span className={`font-semibold font-sans text-sm ${textPrimary}`}>{seg.ac_name}</span>
+              return (
+                <button
+                  key={seg.ac_no}
+                  onClick={() => setSelectedSegment(seg)}
+                  className={`min-w-[200px] sm:min-w-[220px] lg:w-full shrink-0 lg:shrink text-left p-3.5 rounded-xl border cursor-pointer transition-all ${
+                    isSelected 
+                      ? isDark 
+                        ? 'bg-slate-800/80 border-blue-500 shadow-md ring-1 ring-blue-500/50' 
+                        : 'bg-blue-50/80 border-blue-500 shadow-xs ring-1 ring-blue-500/30'
+                      : isDark 
+                        ? 'bg-[#0F172A] border-slate-800/80 hover:border-slate-700 hover:bg-slate-800/40' 
+                        : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <span className={`font-sans font-bold text-xs ${textMuted}`}>#{seg.ac_no}</span>
+                      <span className={`font-semibold font-sans text-sm ${textPrimary}`}>{seg.ac_name}</span>
+                    </div>
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-sans font-semibold border ${
+                      isAIMIM 
+                        ? isDark ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                        : isDark ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-amber-50 text-amber-700 border-amber-200'
+                    }`}>
+                      {seg.leading_party_2024} Lead
+                    </span>
                   </div>
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-sans font-semibold border ${
-                    isAIMIM 
-                      ? isDark ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                      : isDark ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-amber-50 text-amber-700 border-amber-200'
-                  }`}>
-                    {seg.leading_party_2024} Lead
-                  </span>
-                </div>
-                <div className={`flex items-center justify-between mt-2 text-xs font-mono ${textSecondary}`}>
-                  <span className="font-sans">Turnout: <span className="font-mono">{seg.turnout_2024}%</span></span>
-                  <span className={`font-semibold ${textPrimary}`}>+{dynamicLead.toLocaleString()}</span>
-                </div>
-              </button>
-            );
-          })}
+                  <div className={`flex items-center justify-between mt-2 text-xs font-sans ${textSecondary}`}>
+                    <span>Turnout: <span className="font-semibold tabular-nums text-slate-700 dark:text-slate-300">{seg.turnout_2024}%</span></span>
+                    <span className={`font-bold tabular-nums ${textPrimary}`}>+{dynamicLead.toLocaleString()}</span>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Right Detail Dossier for Selected Segment */}
@@ -210,7 +213,7 @@ export const AssemblyTab: React.FC<AssemblyTabProps> = ({ segments, selectedYear
                   <h3 className={`text-xl font-bold font-sans tracking-tight ${textPrimary}`}>
                     {selectedSegment.ac_name} Assembly Segment
                   </h3>
-                  <span className={`px-2 py-0.5 rounded text-xs font-mono border ${
+                  <span className={`px-2 py-0.5 rounded text-xs font-sans font-bold border ${
                     isDark ? 'bg-slate-800 text-slate-300 border-slate-700' : 'bg-slate-100 text-slate-700 border-slate-200'
                   }`}>
                     AC #{selectedSegment.ac_no}
@@ -223,7 +226,7 @@ export const AssemblyTab: React.FC<AssemblyTabProps> = ({ segments, selectedYear
 
               <div className="text-right">
                 <span className={`text-xs font-sans uppercase font-medium ${textSecondary}`}>{selectedYear} LOK SABHA LEAD</span>
-                <div className="text-xl font-bold font-mono text-emerald-500 mt-0.5">
+                <div className="text-2xl font-extrabold font-sans tracking-tight tabular-nums text-emerald-500 mt-0.5">
                   +{Math.round(selectedSegment.lead_margin_2024 * mult).toLocaleString()}
                 </div>
                 <span className={`text-[11px] font-sans font-semibold ${textSecondary}`}>{selectedSegment.leading_party_2024}</span>
@@ -232,24 +235,24 @@ export const AssemblyTab: React.FC<AssemblyTabProps> = ({ segments, selectedYear
 
             {/* Quick Metrics Matrix */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 my-5">
-              <div className={`p-3 rounded-lg border ${subCardBg}`}>
-                <span className={`text-[10px] font-sans font-semibold uppercase ${textSecondary}`}>Segment Electors ({selectedYear})</span>
-                <div className={`text-base font-bold font-mono mt-1 ${textPrimary}`}>
+              <div className={`p-3.5 rounded-xl border ${subCardBg}`}>
+                <span className={`text-[10px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>Segment Electors ({selectedYear})</span>
+                <div className={`text-xl font-extrabold font-sans tracking-tight tabular-nums mt-1 ${textPrimary}`}>
                   {Math.round(selectedSegment.electors * mult).toLocaleString()}
                 </div>
               </div>
-              <div className={`p-3 rounded-lg border ${subCardBg}`}>
-                <span className={`text-[10px] font-sans font-semibold uppercase ${textSecondary}`}>Turnout Rate</span>
-                <div className="text-base font-bold font-mono text-purple-500 mt-1">
+              <div className={`p-3.5 rounded-xl border ${subCardBg}`}>
+                <span className={`text-[10px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>Turnout Rate</span>
+                <div className="text-xl font-extrabold font-sans tracking-tight tabular-nums text-purple-500 mt-1">
                   {selectedSegment.turnout_2024}%
                 </div>
               </div>
-              <div className={`p-3 rounded-lg border col-span-2 sm:col-span-1 ${subCardBg}`}>
-                <span className={`text-[10px] font-sans font-semibold uppercase ${textSecondary}`}>Assembly Winner</span>
+              <div className={`p-3.5 rounded-xl border col-span-2 sm:col-span-1 ${subCardBg}`}>
+                <span className={`text-[10px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>Assembly Winner</span>
                 <div className={`text-sm font-bold font-sans mt-1 truncate ${textPrimary}`}>
                   {selectedSegment.winner_assembly_2023}
                 </div>
-                <span className="text-[10px] font-sans font-semibold text-emerald-500">
+                <span className="text-[11px] font-sans font-semibold text-emerald-500">
                   {selectedSegment.party_assembly_2023} (+{selectedSegment.assembly_margin_2023.toLocaleString()})
                 </span>
               </div>

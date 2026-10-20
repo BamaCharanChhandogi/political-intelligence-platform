@@ -128,15 +128,15 @@ export function App() {
       <footer className={`border-t py-6 mt-12 transition-colors ${
         isDark ? 'border-slate-800/80 bg-[#090D16] text-slate-500' : 'border-slate-200 bg-white text-slate-600'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs font-sans gap-3">
-          <div className="flex items-center space-x-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs font-sans gap-3 text-center sm:text-left">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2 gap-y-1">
             <span className={`font-semibold ${isDark ? 'text-slate-300' : 'text-slate-800'}`}>
               Corporate Chanakya Political Intelligence Platform
             </span>
-            <span>•</span>
+            <span className="hidden sm:inline">•</span>
             <span>Hyderabad Parliamentary Constituency Technical Assignment</span>
           </div>
-          <div className="flex items-center space-x-3">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-3 gap-y-1">
             <span>Sources: ECI Statistical Reports | Census of India</span>
             <span>•</span>
             <span className={`font-mono ${apiConnected ? 'text-emerald-500 font-medium' : 'text-blue-500'}`}>

@@ -76,7 +76,7 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
           }`}>
             Winner: {currentElection.winner_party}
           </span>
-          <span className={`px-2.5 py-1 rounded-lg border font-mono ${
+          <span className={`px-2.5 py-1 rounded-lg border font-semibold tabular-nums ${
             isDark ? 'bg-slate-900 border-slate-800 text-slate-300' : 'bg-slate-100 border-slate-200 text-slate-700'
           }`}>
             Lead: +{currentElection.winning_margin.toLocaleString()}
@@ -88,26 +88,26 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className={`border rounded-xl p-4 transition-colors ${cardBg}`}>
           <div className={`text-[11px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>Total Electors</div>
-          <div className={`text-xl font-bold font-mono mt-1.5 ${textPrimary}`}>
+          <div className={`text-2xl font-extrabold font-sans tracking-tight tabular-nums mt-1.5 ${textPrimary}`}>
             {currentElection.total_electors.toLocaleString()}
           </div>
         </div>
         <div className={`border rounded-xl p-4 transition-colors ${cardBg}`}>
           <div className={`text-[11px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>Votes Polled (Turnout)</div>
-          <div className={`text-xl font-bold font-mono mt-1.5 ${textPrimary}`}>
-            {currentElection.total_votes_polled.toLocaleString()} <span className="text-sm font-normal text-slate-400">({currentElection.voter_turnout_percent}%)</span>
+          <div className={`text-2xl font-extrabold font-sans tracking-tight tabular-nums mt-1.5 ${textPrimary}`}>
+            {currentElection.total_votes_polled.toLocaleString()} <span className="text-xs font-semibold text-slate-400 font-sans">({currentElection.voter_turnout_percent}%)</span>
           </div>
         </div>
         <div className={`border rounded-xl p-4 transition-colors ${cardBg}`}>
           <div className={`text-[11px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>Winning Margin</div>
-          <div className="text-xl font-bold font-mono text-emerald-500 mt-1.5">
-            +{currentElection.winning_margin.toLocaleString()} <span className="text-sm font-normal text-emerald-500/80">({currentElection.winning_margin_percent}%)</span>
+          <div className="text-2xl font-extrabold font-sans tracking-tight tabular-nums text-emerald-500 mt-1.5">
+            +{currentElection.winning_margin.toLocaleString()} <span className="text-xs font-semibold text-emerald-500/80 font-sans">({currentElection.winning_margin_percent}%)</span>
           </div>
         </div>
         <div className={`border rounded-xl p-4 transition-colors ${cardBg}`}>
           <div className={`text-[11px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>NOTA Votes</div>
-          <div className={`text-xl font-bold font-mono mt-1.5 ${textPrimary}`}>
-            {currentElection.nota_votes.toLocaleString()} <span className="text-sm font-normal text-slate-400">({currentElection.nota_percent}%)</span>
+          <div className={`text-2xl font-extrabold font-sans tracking-tight tabular-nums mt-1.5 ${textPrimary}`}>
+            {currentElection.nota_votes.toLocaleString()} <span className="text-xs font-semibold text-slate-400 font-sans">({currentElection.nota_percent}%)</span>
           </div>
         </div>
       </div>
@@ -122,8 +122,8 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
             <span>Candidate-Level Vote Breakdown & Performance</span>
           </h3>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+          <div className="overflow-x-auto -mx-2 sm:mx-0">
+            <table className="w-full min-w-[580px] text-left text-xs">
               <thead>
                 <tr className={`border-b font-sans text-[11px] ${tableBorder}`}>
                   <th className="pb-3 font-semibold">POS</th>
@@ -135,10 +135,10 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
                   <th className="pb-3 font-semibold text-right">VOTE SHARE</th>
                 </tr>
               </thead>
-              <tbody className={`divide-y font-mono ${tableDivide}`}>
+              <tbody className={`divide-y font-sans text-xs ${tableDivide}`}>
                 {currentElection.candidates.map((candidate) => (
                   <tr key={candidate.name} className={`${tableHover} transition-colors ${candidate.is_winner ? winnerRowBg : ''}`}>
-                    <td className="py-3.5">
+                    <td className="py-3.5 font-bold">
                       {candidate.is_winner ? (
                         <span className="flex items-center space-x-1 text-emerald-500 font-bold">
                           <Trophy className="h-3.5 w-3.5" />
@@ -172,10 +172,10 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
                         {candidate.party}
                       </span>
                     </td>
-                    <td className={`py-3.5 text-right ${textSecondary}`}>{candidate.evm_votes.toLocaleString()}</td>
-                    <td className={`py-3.5 text-right ${textMuted}`}>{candidate.postal_votes.toLocaleString()}</td>
-                    <td className={`py-3.5 text-right font-semibold ${textPrimary}`}>{candidate.total_votes.toLocaleString()}</td>
-                    <td className="py-3.5 text-right font-semibold text-blue-500">{candidate.vote_share_percent}%</td>
+                    <td className={`py-3.5 text-right tabular-nums font-medium ${textSecondary}`}>{candidate.evm_votes.toLocaleString()}</td>
+                    <td className={`py-3.5 text-right tabular-nums font-medium ${textMuted}`}>{candidate.postal_votes.toLocaleString()}</td>
+                    <td className={`py-3.5 text-right tabular-nums font-bold ${textPrimary}`}>{candidate.total_votes.toLocaleString()}</td>
+                    <td className="py-3.5 text-right tabular-nums font-bold text-blue-500">{candidate.vote_share_percent}%</td>
                   </tr>
                 ))}
               </tbody>
@@ -222,11 +222,11 @@ export const ParliamentaryTab: React.FC<ParliamentaryTabProps> = ({
               <div key={item.name} className="flex items-center justify-between text-xs font-sans">
                 <div className="flex items-center space-x-2">
                   <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: item.color }}></span>
-                  <span className={`truncate max-w-[140px] ${textSecondary}`}>{item.name}</span>
+                  <span className={`truncate max-w-[140px] font-medium ${textSecondary}`}>{item.name}</span>
                 </div>
-                <div className="font-mono">
-                  <span className={`font-semibold ${textPrimary}`}>{item.value}%</span>
-                  <span className={`text-[10px] ml-1 ${textMuted}`}>({item.votes.toLocaleString()})</span>
+                <div className="font-sans tabular-nums text-right">
+                  <span className={`font-bold ${textPrimary}`}>{item.value}%</span>
+                  <span className={`text-[11px] ml-1.5 font-medium ${textMuted}`}>({item.votes.toLocaleString()})</span>
                 </div>
               </div>
             ))}

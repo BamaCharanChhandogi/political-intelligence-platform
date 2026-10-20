@@ -81,14 +81,14 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
               <h2 className={`text-lg font-bold font-sans tracking-tight ${textPrimary}`}>
                 Constituency Demographic Baseline & Strategic Analysis
               </h2>
-              <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-semibold border ${
+              <span className={`px-2 py-0.5 rounded text-[10px] font-sans font-bold border ${
                 isDark ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-blue-50 text-blue-700 border-blue-200'
               }`}>
                 CENSUS 2011 BASELINE
               </span>
             </div>
             <p className={`text-xs font-sans mt-1 ${textSecondary}`}>
-              Official Primary Census Abstract for {demographics.district} District • Projected Registered Electors ({selectedYear}): <span className="font-mono text-blue-500 font-semibold">{activeElectorate.toLocaleString()}</span>
+              Official Primary Census Abstract for {demographics.district} District • Projected Registered Electors ({selectedYear}): <span className="font-sans font-bold text-blue-500 tabular-nums">{activeElectorate.toLocaleString()}</span>
             </p>
           </div>
 
@@ -109,7 +109,7 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
             <span>Census Population</span>
             <Users className="h-4 w-4 text-blue-500" />
           </div>
-          <div className={`text-xl font-bold font-mono mt-2 ${textPrimary}`}>
+          <div className={`text-2xl font-extrabold font-sans tracking-tight tabular-nums mt-2 ${textPrimary}`}>
             {demographics.total_population.toLocaleString()}
           </div>
           <div className={`text-[11px] font-sans ${textSecondary} mt-1 flex justify-between`}>
@@ -123,7 +123,7 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
             <span>Literacy Rate</span>
             <BookOpen className="h-4 w-4 text-emerald-500" />
           </div>
-          <div className="text-xl font-bold font-mono text-emerald-500 mt-2">
+          <div className="text-2xl font-extrabold font-sans tracking-tight tabular-nums text-emerald-500 mt-2">
             {demographics.literacy_rate}%
           </div>
           <div className={`text-[11px] font-sans ${textSecondary} mt-1 flex justify-between`}>
@@ -137,7 +137,7 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
             <span>Sex Ratio</span>
             <HeartHandshake className="h-4 w-4 text-purple-500" />
           </div>
-          <div className="text-xl font-bold font-mono text-purple-500 mt-2">
+          <div className="text-2xl font-extrabold font-sans tracking-tight tabular-nums text-purple-500 mt-2">
             {demographics.sex_ratio}
           </div>
           <div className={`text-[11px] font-sans ${textSecondary} mt-1`}>
@@ -150,7 +150,7 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
             <span>Density (per km²)</span>
             <Building className="h-4 w-4 text-amber-500" />
           </div>
-          <div className="text-xl font-bold font-mono text-amber-500 mt-2">
+          <div className="text-2xl font-extrabold font-sans tracking-tight tabular-nums text-amber-500 mt-2">
             {demographics.population_density_per_sq_km.toLocaleString()}
           </div>
           <div className={`text-[11px] font-sans ${textSecondary} mt-1`}>
@@ -209,8 +209,8 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
                   <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: r.color }}></span>
                   <span className={textSecondary}>{r.religion}</span>
                 </div>
-                <div className="font-mono">
-                  <span className={`font-semibold ${textPrimary}`}>{r.percent}%</span>
+                <div className="font-sans tabular-nums text-right">
+                  <span className={`font-bold ${textPrimary}`}>{r.percent}%</span>
                 </div>
               </div>
             ))}
@@ -240,7 +240,7 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
                 margin={{ top: 10, right: 20, left: 40, bottom: 0 }}
               >
                 <CartesianGrid strokeDasharray="3 3" stroke={gridStroke} horizontal={false} />
-                <XAxis type="number" stroke="#94A3B8" fontSize={11} unit="%" fontFamily="monospace" />
+                <XAxis type="number" stroke="#94A3B8" fontSize={11} unit="%" />
                 <YAxis dataKey="category" type="category" stroke="#94A3B8" fontSize={11} width={120} tickLine={false} />
                 <Tooltip 
                   contentStyle={{ backgroundColor: tooltipBg, borderColor: tooltipBorder, borderRadius: '8px', fontSize: '12px' }}
@@ -251,9 +251,9 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
             </ResponsiveContainer>
           </div>
 
-          <div className={`mt-4 pt-3 border-t flex items-center justify-between text-xs font-sans ${isDark ? 'border-slate-800 text-slate-400' : 'border-slate-100 text-slate-500'}`}>
+          <div className={`mt-4 pt-3 border-t flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 text-xs font-sans ${isDark ? 'border-slate-800 text-slate-400' : 'border-slate-100 text-slate-500'}`}>
             <span>Dominant Electorate: General & Minorities (86.1%)</span>
-            <span className="font-mono text-emerald-500 font-medium">SC/ST Reserved ACs: 0</span>
+            <span className="font-sans font-bold text-emerald-500">SC/ST Reserved ACs: 0</span>
           </div>
         </div>
 
@@ -278,8 +278,8 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={swingChartData} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke={gridStroke} vertical={false} />
-              <XAxis dataKey="period" stroke="#94A3B8" fontSize={11} tickLine={false} fontFamily="monospace" />
-              <YAxis stroke="#94A3B8" fontSize={11} tickLine={false} unit="%" fontFamily="monospace" />
+              <XAxis dataKey="period" stroke="#94A3B8" fontSize={11} tickLine={false} />
+              <YAxis stroke="#94A3B8" fontSize={11} tickLine={false} unit="%" />
               <Tooltip 
                 contentStyle={{ backgroundColor: tooltipBg, borderColor: tooltipBorder, borderRadius: '8px', fontSize: '12px' }}
                 itemStyle={{ color: isDark ? '#F8FAFC' : '#0F172A' }}
@@ -292,7 +292,7 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
           </ResponsiveContainer>
         </div>
 
-        <div className={`flex items-center justify-center space-x-6 mt-4 pt-3 border-t text-xs font-sans ${isDark ? 'border-slate-800' : 'border-slate-100'}`}>
+        <div className={`flex flex-wrap items-center justify-center gap-3 sm:gap-6 mt-4 pt-3 border-t text-xs font-sans ${isDark ? 'border-slate-800' : 'border-slate-100'}`}>
           <div className="flex items-center space-x-1.5">
             <span className="h-2.5 w-2.5 rounded-full bg-[#20783B]"></span>
             <span className={textSecondary}>AIMIM</span>
@@ -343,7 +343,7 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
                 <span className={`text-[10px] font-sans font-semibold px-2 py-0.5 rounded border ${badgeColor}`}>
                   {insight.type.toUpperCase()}
                 </span>
-                <span className={`font-mono text-xs ${textSecondary}`}>#0{idx + 1}</span>
+                <span className={`font-sans font-bold text-xs ${textSecondary}`}>#0{idx + 1}</span>
               </div>
               <h4 className={`text-base font-bold font-sans tracking-tight mt-1 mb-2 ${textPrimary}`}>
                 {insight.title}
