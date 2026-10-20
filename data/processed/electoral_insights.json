@@ -1,0 +1,50 @@
+{
+  "key_findings": [
+    {
+      "title": "Vote Share Polarization & Consolidation",
+      "observation": "AIMIM vote share grew from 39.17% (2009) to 61.28% (2024), demonstrating complete consolidation of the Muslim voter base. Simultaneously, BJP doubled vote share from 18.64% (2009) to 29.98% (2024), converting Hyderabad into a direct bipolar duel while squeezing Congress and BRS below 8% combined.",
+      "type": "Trend"
+    },
+    {
+      "title": "Goshamahal Anomaly (Assembly vs Parliamentary)",
+      "observation": "Goshamahal is the sole non-AIMIM segment where BJP secured a 70,230 lead in 2024 Lok Sabha. However, AIMIM's massive leads in Bahadurpura (135,407) and Chandrayangutta (86,830) comfortably neutralize Goshamahal by a factor of 3.2x.",
+      "type": "Geography"
+    },
+    {
+      "title": "Collapse of Third Poles (BRS & Congress)",
+      "observation": "In 2019, TRS (now BRS) and INC held 12.89% combined. In 2024, despite Congress governing the state of Telangana, their parliamentary candidate garnered only 5.83%, indicating tactical voting by anti-BJP electors toward AIMIM.",
+      "type": "Behavior"
+    },
+    {
+      "title": "Voter Turnout Asymmetry",
+      "observation": "Turnout in old city core segments (Charminar 45.1%, Yakutpura 43.6%) remains 8-12% below Goshamahal (56.4%) and Bahadurpura (52.8%). The low turnout paradox demonstrates that AIMIM wins decisively even with moderate mobilization, presenting untapped growth potential for opposition if turnout spikes above 65%.",
+      "type": "Electorate"
+    }
+  ],
+  "swing_analysis": [
+    {
+      "period": "2019 vs 2024",
+      "aimim_swing": "+2.34%",
+      "bjp_swing": "+3.18%",
+      "inc_swing": "+0.14%",
+      "brs_swing": "-5.47%",
+      "others_swing": "-0.19%"
+    },
+    {
+      "period": "2014 vs 2019",
+      "aimim_swing": "+6.04%",
+      "bjp_swing": "-5.26%",
+      "inc_swing": "+0.59%",
+      "brs_swing": "+3.30%",
+      "others_swing": "-4.67%"
+    },
+    {
+      "period": "2009 vs 2014",
+      "aimim_swing": "+13.73%",
+      "bjp_swing": "+13.42%",
+      "inc_swing": "-6.79%",
+      "tdp_swing": "-24.69%",
+      "others_swing": "-0.55%"
+    }
+  ]
+}

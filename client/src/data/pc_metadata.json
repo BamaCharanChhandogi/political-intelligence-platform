@@ -1,0 +1,14 @@
+{
+  "id": 1,
+  "code": "PC-09",
+  "name": "Hyderabad",
+  "state": "Telangana",
+  "state_code": "TG",
+  "type": "GEN",
+  "total_electors_2024": 2217196,
+  "total_electors_2019": 1952516,
+  "total_electors_2014": 1823217,
+  "total_electors_2009": 1500353,
+  "assembly_segments_count": 7,
+  "historical_status": "AIMIM Stronghold since 1984 (Sultan Salahuddin Owaisi & Asaduddin Owaisi)"
+}
