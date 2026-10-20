@@ -1,0 +1,319 @@
+[
+  {
+    "year": 2024,
+    "election_date": "2024-05-13",
+    "counting_date": "2024-06-04",
+    "total_electors": 2217196,
+    "total_votes_polled": 1080277,
+    "voter_turnout_percent": 48.72,
+    "valid_votes": 1076985,
+    "nota_votes": 3292,
+    "nota_percent": 0.31,
+    "winning_margin": 338087,
+    "winning_margin_percent": 31.39,
+    "winner_party": "AIMIM",
+    "candidates": [
+      {
+        "name": "Asaduddin Owaisi",
+        "party": "AIMIM",
+        "party_color": "#20783B",
+        "evm_votes": 657155,
+        "postal_votes": 4826,
+        "total_votes": 661981,
+        "vote_share_percent": 61.28,
+        "position": 1,
+        "is_winner": true
+      },
+      {
+        "name": "Madhavi Latha Kompella",
+        "party": "BJP",
+        "party_color": "#FF9933",
+        "evm_votes": 321528,
+        "postal_votes": 2366,
+        "total_votes": 323894,
+        "vote_share_percent": 29.98,
+        "position": 2,
+        "is_winner": false
+      },
+      {
+        "name": "Mohammed Waliullah Sameer",
+        "party": "INC",
+        "party_color": "#19AAED",
+        "evm_votes": 62510,
+        "postal_votes": 452,
+        "total_votes": 62962,
+        "vote_share_percent": 5.83,
+        "position": 3,
+        "is_winner": false
+      },
+      {
+        "name": "Gaddam Srinivas Yadav",
+        "party": "BRS",
+        "party_color": "#FE0175",
+        "evm_votes": 18519,
+        "postal_votes": 122,
+        "total_votes": 18641,
+        "vote_share_percent": 1.73,
+        "position": 4,
+        "is_winner": false
+      },
+      {
+        "name": "Others & Independents",
+        "party": "IND/OTH",
+        "party_color": "#94A3B8",
+        "evm_votes": 9400,
+        "postal_votes": 107,
+        "total_votes": 9507,
+        "vote_share_percent": 0.88,
+        "position": 5,
+        "is_winner": false
+      },
+      {
+        "name": "NOTA",
+        "party": "NOTA",
+        "party_color": "#64748B",
+        "evm_votes": 3274,
+        "postal_votes": 18,
+        "total_votes": 3292,
+        "vote_share_percent": 0.31,
+        "position": 6,
+        "is_winner": false
+      }
+    ]
+  },
+  {
+    "year": 2019,
+    "election_date": "2019-04-11",
+    "counting_date": "2019-05-23",
+    "total_electors": 1952516,
+    "total_votes_polled": 877941,
+    "voter_turnout_percent": 44.96,
+    "valid_votes": 872278,
+    "nota_votes": 5663,
+    "nota_percent": 0.65,
+    "winning_margin": 282186,
+    "winning_margin_percent": 32.14,
+    "winner_party": "AIMIM",
+    "candidates": [
+      {
+        "name": "Asaduddin Owaisi",
+        "party": "AIMIM",
+        "party_color": "#20783B",
+        "evm_votes": 515822,
+        "postal_votes": 1649,
+        "total_votes": 517471,
+        "vote_share_percent": 58.94,
+        "position": 1,
+        "is_winner": true
+      },
+      {
+        "name": "Dr. Bhagavanth Rao",
+        "party": "BJP",
+        "party_color": "#FF9933",
+        "evm_votes": 234529,
+        "postal_votes": 756,
+        "total_votes": 235285,
+        "vote_share_percent": 26.8,
+        "position": 2,
+        "is_winner": false
+      },
+      {
+        "name": "Pusthe Srikanth",
+        "party": "TRS",
+        "party_color": "#FE0175",
+        "evm_votes": 63012,
+        "postal_votes": 227,
+        "total_votes": 63239,
+        "vote_share_percent": 7.2,
+        "position": 3,
+        "is_winner": false
+      },
+      {
+        "name": "Mohammed Feroz Khan",
+        "party": "INC",
+        "party_color": "#19AAED",
+        "evm_votes": 49791,
+        "postal_votes": 153,
+        "total_votes": 49944,
+        "vote_share_percent": 5.69,
+        "position": 4,
+        "is_winner": false
+      },
+      {
+        "name": "Others & Independents",
+        "party": "IND/OTH",
+        "party_color": "#94A3B8",
+        "evm_votes": 6245,
+        "postal_votes": 94,
+        "total_votes": 6339,
+        "vote_share_percent": 0.72,
+        "position": 5,
+        "is_winner": false
+      },
+      {
+        "name": "NOTA",
+        "party": "NOTA",
+        "party_color": "#64748B",
+        "evm_votes": 5649,
+        "postal_votes": 14,
+        "total_votes": 5663,
+        "vote_share_percent": 0.65,
+        "position": 6,
+        "is_winner": false
+      }
+    ]
+  },
+  {
+    "year": 2014,
+    "election_date": "2014-04-30",
+    "counting_date": "2014-05-16",
+    "total_electors": 1823217,
+    "total_votes_polled": 971438,
+    "voter_turnout_percent": 53.28,
+    "valid_votes": 961945,
+    "nota_votes": 9493,
+    "nota_percent": 0.98,
+    "winning_margin": 202727,
+    "winning_margin_percent": 20.87,
+    "winner_party": "AIMIM",
+    "candidates": [
+      {
+        "name": "Asaduddin Owaisi",
+        "party": "AIMIM",
+        "party_color": "#20783B",
+        "evm_votes": 513271,
+        "postal_votes": 597,
+        "total_votes": 513868,
+        "vote_share_percent": 52.9,
+        "position": 1,
+        "is_winner": true
+      },
+      {
+        "name": "Dr. Bhagavanth Rao",
+        "party": "BJP",
+        "party_color": "#FF9933",
+        "evm_votes": 310815,
+        "postal_votes": 326,
+        "total_votes": 311141,
+        "vote_share_percent": 32.06,
+        "position": 2,
+        "is_winner": false
+      },
+      {
+        "name": "S. Danam Nagender",
+        "party": "INC",
+        "party_color": "#19AAED",
+        "evm_votes": 49506,
+        "postal_votes": 92,
+        "total_votes": 49598,
+        "vote_share_percent": 5.1,
+        "position": 3,
+        "is_winner": false
+      },
+      {
+        "name": "Rashid Shareef",
+        "party": "TRS",
+        "party_color": "#FE0175",
+        "evm_votes": 37780,
+        "postal_votes": 66,
+        "total_votes": 37846,
+        "vote_share_percent": 3.9,
+        "position": 4,
+        "is_winner": false
+      },
+      {
+        "name": "Others & Independents",
+        "party": "IND/OTH",
+        "party_color": "#94A3B8",
+        "evm_votes": 49405,
+        "postal_votes": 87,
+        "total_votes": 49492,
+        "vote_share_percent": 5.06,
+        "position": 5,
+        "is_winner": false
+      },
+      {
+        "name": "NOTA",
+        "party": "NOTA",
+        "party_color": "#64748B",
+        "evm_votes": 9474,
+        "postal_votes": 19,
+        "total_votes": 9493,
+        "vote_share_percent": 0.98,
+        "position": 6,
+        "is_winner": false
+      }
+    ]
+  },
+  {
+    "year": 2009,
+    "election_date": "2009-04-16",
+    "counting_date": "2009-05-16",
+    "total_electors": 1500353,
+    "total_votes_polled": 786523,
+    "voter_turnout_percent": 52.42,
+    "valid_votes": 786523,
+    "nota_votes": 0,
+    "nota_percent": 0.0,
+    "winning_margin": 113865,
+    "winning_margin_percent": 14.48,
+    "winner_party": "AIMIM",
+    "candidates": [
+      {
+        "name": "Asaduddin Owaisi",
+        "party": "AIMIM",
+        "party_color": "#20783B",
+        "evm_votes": 308061,
+        "postal_votes": 0,
+        "total_votes": 308061,
+        "vote_share_percent": 39.17,
+        "position": 1,
+        "is_winner": true
+      },
+      {
+        "name": "Zahid Ali Khan",
+        "party": "TDP",
+        "party_color": "#FFD700",
+        "evm_votes": 194196,
+        "postal_votes": 0,
+        "total_votes": 194196,
+        "vote_share_percent": 24.69,
+        "position": 2,
+        "is_winner": false
+      },
+      {
+        "name": "Venkat Narayan Reddy",
+        "party": "BJP",
+        "party_color": "#FF9933",
+        "evm_votes": 146603,
+        "postal_votes": 0,
+        "total_votes": 146603,
+        "vote_share_percent": 18.64,
+        "position": 3,
+        "is_winner": false
+      },
+      {
+        "name": "P. Laxman Rao Yadav",
+        "party": "INC",
+        "party_color": "#19AAED",
+        "evm_votes": 93542,
+        "postal_votes": 0,
+        "total_votes": 93542,
+        "vote_share_percent": 11.89,
+        "position": 4,
+        "is_winner": false
+      },
+      {
+        "name": "Others & Independents",
+        "party": "IND/OTH",
+        "party_color": "#94A3B8",
+        "evm_votes": 44121,
+        "postal_votes": 0,
+        "total_votes": 44121,
+        "vote_share_percent": 5.61,
+        "position": 5,
+        "is_winner": false
+      }
+    ]
+  }
+]

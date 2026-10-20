@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "All India Majlis-e-Ittehadul Muslimeen",
+    "abbreviation": "AIMIM",
+    "alliance": "Others",
+    "color": "#20783B",
+    "symbol": "Kite",
+    "founded": 1927
+  },
+  {
+    "id": 2,
+    "name": "Bharatiya Janata Party",
+    "abbreviation": "BJP",
+    "alliance": "NDA",
+    "color": "#FF9933",
+    "symbol": "Lotus",
+    "founded": 1980
+  },
+  {
+    "id": 3,
+    "name": "Indian National Congress",
+    "abbreviation": "INC",
+    "alliance": "INDIA",
+    "color": "#19AAED",
+    "symbol": "Hand",
+    "founded": 1885
+  },
+  {
+    "id": 4,
+    "name": "Bharat Rashtra Samithi",
+    "abbreviation": "BRS",
+    "alliance": "Others",
+    "color": "#FE0175",
+    "symbol": "Car",
+    "founded": 2001
+  },
+  {
+    "id": 5,
+    "name": "Telugu Desam Party",
+    "abbreviation": "TDP",
+    "alliance": "NDA",
+    "color": "#FFD700",
+    "symbol": "Bicycle",
+    "founded": 1982
+  },
+  {
+    "id": 6,
+    "name": "None of the Above",
+    "abbreviation": "NOTA",
+    "alliance": "N/A",
+    "color": "#64748B",
+    "symbol": "NOTA",
+    "founded": 2013
+  },
+  {
+    "id": 7,
+    "name": "Independent & Others",
+    "abbreviation": "IND/OTH",
+    "alliance": "Independent",
+    "color": "#94A3B8",
+    "symbol": "Various",
+    "founded": null
+  }
+]

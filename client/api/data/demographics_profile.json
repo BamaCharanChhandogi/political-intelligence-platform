@@ -1,0 +1,97 @@
+{
+  "constituency": "Hyderabad",
+  "district": "Hyderabad",
+  "census_year": 2011,
+  "total_population": 3943323,
+  "male_population": 2018575,
+  "female_population": 1924748,
+  "sex_ratio": 954,
+  "population_density_per_sq_km": 18172,
+  "literacy_rate": 83.25,
+  "male_literacy": 86.99,
+  "female_literacy": 79.35,
+  "urban_population_percent": 100.0,
+  "rural_population_percent": 0.0,
+  "religious_composition": [
+    {
+      "religion": "Muslim",
+      "percent": 58.4,
+      "population": 2302890,
+      "color": "#10B981"
+    },
+    {
+      "religion": "Hindu",
+      "percent": 38.6,
+      "population": 1522122,
+      "color": "#F59E0B"
+    },
+    {
+      "religion": "Christian",
+      "percent": 1.8,
+      "population": 70980,
+      "color": "#3B82F6"
+    },
+    {
+      "religion": "Jain & Sikh & Others",
+      "percent": 1.2,
+      "population": 47331,
+      "color": "#8B5CF6"
+    }
+  ],
+  "social_category_composition": [
+    {
+      "category": "General & Minorities",
+      "percent": 86.1,
+      "population": 3395200
+    },
+    {
+      "category": "Scheduled Caste (SC)",
+      "percent": 6.8,
+      "population": 268145
+    },
+    {
+      "category": "Scheduled Tribe (ST)",
+      "percent": 1.2,
+      "population": 47320
+    },
+    {
+      "category": "Other Backward Classes (OBC/BC)",
+      "percent": 5.9,
+      "population": 232658
+    }
+  ],
+  "age_demographics": [
+    {
+      "group": "18-25 (First-time & Youth)",
+      "percent": 21.4,
+      "elector_impact": "High digital engagement"
+    },
+    {
+      "group": "26-40 (Working Core)",
+      "percent": 37.8,
+      "elector_impact": "Economic livelihood & civic infra priority"
+    },
+    {
+      "group": "41-60 (Middle Age)",
+      "percent": 26.5,
+      "elector_impact": "High turnout, traditional party loyalty"
+    },
+    {
+      "group": "60+ (Senior Citizens)",
+      "percent": 14.3,
+      "elector_impact": "Welfare pensions & health reliance"
+    }
+  ],
+  "socio_economic_indicators": {
+    "workforce_participation_rate": 35.8,
+    "major_economic_sectors": [
+      "Trade & Retail Commerce",
+      "Jewellery & Pearls",
+      "Information Technology",
+      "Health & Pharma Tourism",
+      "Unorganized Artisan Services"
+    ],
+    "slum_household_percent": 31.4,
+    "piped_drinking_water_coverage": 89.2
+  }
+}

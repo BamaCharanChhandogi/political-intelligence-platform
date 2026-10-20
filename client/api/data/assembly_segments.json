@@ -1,0 +1,51 @@
+[
+  {
+    "ac_no": 58,
+    "name": "Malakpet",
+    "district": "Hyderabad",
+    "category": "GEN",
+    "electors_2024": 305120
+  },
+  {
+    "ac_no": 64,
+    "name": "Karwan",
+    "district": "Hyderabad",
+    "category": "GEN",
+    "electors_2024": 338940
+  },
+  {
+    "ac_no": 65,
+    "name": "Goshamahal",
+    "district": "Hyderabad",
+    "category": "GEN",
+    "electors_2024": 272490
+  },
+  {
+    "ac_no": 66,
+    "name": "Charminar",
+    "district": "Hyderabad",
+    "category": "GEN",
+    "electors_2024": 226810
+  },
+  {
+    "ac_no": 67,
+    "name": "Chandrayangutta",
+    "district": "Hyderabad",
+    "category": "GEN",
+    "electors_2024": 321750
+  },
+  {
+    "ac_no": 68,
+    "name": "Yakutpura",
+    "district": "Hyderabad",
+    "category": "GEN",
+    "electors_2024": 348220
+  },
+  {
+    "ac_no": 69,
+    "name": "Bahadurpura",
+    "district": "Hyderabad",
+    "category": "GEN",
+    "electors_2024": 403866
+  }
+]
