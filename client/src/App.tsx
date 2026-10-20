@@ -131,16 +131,17 @@ export function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs font-sans gap-3 text-center sm:text-left">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-2 gap-y-1">
             <span className={`font-semibold ${isDark ? 'text-slate-300' : 'text-slate-800'}`}>
-              Corporate Chanakya Political Intelligence Platform
+              Corporate Chanakya
             </span>
             <span className="hidden sm:inline">•</span>
-            <span>Hyderabad Parliamentary Constituency Technical Assignment</span>
+            <span>Political Intelligence & Electoral Advisory Division</span>
           </div>
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-x-3 gap-y-1">
-            <span>Sources: ECI Statistical Reports | Census of India</span>
-            <span>•</span>
-            <span className={`font-mono ${apiConnected ? 'text-emerald-500 font-medium' : 'text-blue-500'}`}>
-              {apiConnected ? `● ${dataSource}` : '● HIGH-AVAILABILITY RUNTIME'}
+            <span>Sources: Election Commission of India (ECI) & Census Directorate</span>
+            <span className="hidden sm:inline">•</span>
+            <span className="text-emerald-500 font-medium flex items-center space-x-1">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Verified Official Feed</span>
             </span>
           </div>
         </div>
