@@ -4,7 +4,8 @@
 ---
 
 ## 1. Executive Summary & Objective
-This platform is a full-stack, data-driven political intelligence dashboard developed specifically for the **Hyderabad Parliamentary Constituency (Telangana)**. It empowers campaign strategists, political consultants, and leadership teams with granular, verifiable insights across:
+
+This platform is a full-stack, enterprise-grade political intelligence dashboard developed specifically for the **Hyderabad Parliamentary Constituency (Telangana)**. It empowers campaign strategists, political consultants, and leadership teams with granular, verifiable insights across:
 1. **Constituency Demographic & Socio-Economic Profile** (Census of India, PCA)
 2. **Historical Parliamentary Results (2009–2024)** (Election Commission of India)
 3. **Assembly Constituencies Retrospective Analysis** (7 Vidhan Sabha segments)
@@ -12,49 +13,70 @@ This platform is a full-stack, data-driven political intelligence dashboard deve
 
 ---
 
-## 2. System Architecture
+## 2. Application Architecture
 
 ```
-[ Official Data Sources: ECI Reports + Census 2011 + TCPD ]
-                           │
-                           ▼
-          [ Python ETL Pipeline: clean_and_export.py ]
-                           │
-              ┌────────────┴────────────┐
-              ▼                         ▼
-    [ CSV Flat Datasets ]     [ JSON Clean Datasets ]
-       (data/raw/)               (data/processed/)
-                                        │
-                           ┌────────────┴────────────┐
-                           ▼                         ▼
-                  [ Express/TS REST API ]    [ React Client Fallback ]
-                  (server/src/index.ts)      (Zero-Network Resilience)
-                           │                         │
-                           └────────────┬────────────┘
-                                        ▼
-                   [ Elite UI / UX Dashboard Frontend ]
-                     (Tailwind CSS v4 + Recharts + Geist)
+[ Official Data Sources: ECI Reports + Census 2011 + CEO Telangana ]
+                               │
+                               ▼
+              [ Python ETL Pipeline: clean_and_export.py ]
+                               │
+                ┌──────────────┴──────────────┐
+                ▼                             ▼
+      [ CSV Raw Datasets ]          [ JSON Clean Datasets ]
+         (data/raw/)                   (data/processed/)
+                                              │
+                ┌─────────────────────────────┴─────────────────────────────┐
+                ▼                                                           ▼
+     [ PostgreSQL Database ]                                    [ Embedded Static Fallback ]
+  (Neon Serverless / Cloud DB)                                   (Zero-Break Resilience)
+                │                                                           │
+                ▼                                                           │
+     [ Express/Node REST API ]                                              │
+     (server/ & client/api/)                                                │
+                │                                                           │
+                └─────────────────────────────┬─────────────────────────────┘
+                                              ▼
+                             [ React 19 Frontend Dashboard ]
+                         (Vite + Tailwind CSS v4 + Recharts)
 ```
 
-### Key Technical Pillars:
-- **Zero-Break High Availability (Hybrid Mode):** The client dynamically connects to the REST API server at `/api/v1/` with full rate-limiting, CORS, and security middleware. If the backend is decoupled or network fails, it immediately activates embedded fallback data without crashing or degrading UI visuals.
+### Architectural Highlights
+- **Zero-Break High Availability (Hybrid Mode):** The client connects to live cloud PostgreSQL API endpoints (`/api/v1/`) with automated fallback to verified pre-bundled datasets if the network or database is temporarily unreachable.
 - **Micro-Typography & Elite Theme:** Custom Geist Sans and Geist Mono typography with an Obsidian Slate (`#090D16` / `#0F172A`) palette, mirroring Bloomberg Terminal and Palantir Gotham design aesthetics.
 
 ---
 
-## 3. Data Sources & ETL Methodology
+## 3. Frontend Implementation
 
-| Dataset Category | Source Agency | Description | Processing & Transformation |
-|---|---|---|---|
-| **Parliamentary Elections** | Election Commission of India (ECI) | 2009, 2014, 2019, 2024 Lok Sabha Statistical Reports | Calculated EVM vs Postal split, vote share percentages, winning margins, NOTA share, and candidate ranks. |
-| **Assembly Segments** | Chief Electoral Officer, Telangana / ECI | Form 20 booth aggregations across 7 Assembly Constituencies (Malakpet, Karwan, Goshamahal, Charminar, Chandrayangutta, Yakutpura, Bahadurpura) | Extracted 2024 Lok Sabha candidate leads per segment and cross-referenced with 2023 Telangana State Assembly outcomes. |
-| **Demographics** | Office of Registrar General & Census Commissioner, India | 2011 Primary Census Abstract (PCA) for Hyderabad District | Computed religious composition, social group shares (SC/ST/General), age cohorts, literacy gender parity, and workforce metrics. |
+- **Framework:** React 19 with TypeScript, bundled via Vite.
+- **Styling:** Tailwind CSS v4 with custom color themes (War Room Dark `#090D16` and Institutional Light `#F8FAFC`).
+- **Visualizations:** Recharts vector SVG components (Bar charts, Donut charts, Area charts) optimized for zero jank.
+- **Layout Stabilization:** `scrollbar-gutter: stable` and pure CSS capsules prevent UI jitter during tab or year changes.
+- **Component Hierarchy:**
+  - `Navbar`: Frosted glass capsule navigation with year controller, export, and theme switcher.
+  - `OverviewTab`: Executive intelligence summary, top KPIs, longitudinal vote share evolution.
+  - `ParliamentaryTab`: Candidate-level results table, EVM vs Postal split, NOTA analysis, vote distribution donut.
+  - `AssemblyTab`: 7 Vidhan Sabha segments retrospective analysis with interactive constituency dossiers.
+  - `DemographicsTab`: Census demographic profiling, religious and social category compositions, swing matrix.
 
 ---
 
-## 4. API Endpoints Reference
+## 4. Backend Implementation
 
-All endpoints return JSON wrapped with standard status metadata:
+- **Framework:** Node.js with Express.js and TypeScript.
+- **Middleware Pipeline:**
+  - `helmet`: Hardens HTTP headers against injection and clickjacking.
+  - `express-rate-limit`: Prevents abuse (150 requests per 15 minutes).
+  - `cors`: Secure origin validation.
+  - `compression`: Brotli/Gzip payload compression.
+- **Serverless Parity:** Full Vercel Serverless Function implementation at `client/api/index.ts` allowing instant serverless execution without requiring a persistent container.
+
+---
+
+## 5. API Design & Integration
+
+RESTful API specification with consistent JSON payload envelopes:
 
 ```
 GET /api/v1/overview              -> Executive KPI summary, current MP, turnout delta, lead distribution
@@ -68,10 +90,63 @@ GET /api/v1/intelligence-insights -> Strategic takeaways, polarization notes, in
 
 ---
 
-## 5. Security & Performance Optimizations
+## 6. Database Design & Relational Schema
 
-1. **Helmet & Security Headers:** Enforces Content Security Policy, XSS filtering, frame protection.
-2. **Rate Limiting:** `express-rate-limit` prevents API abuse with a 150 requests/15-minute window per IP.
-3. **Compression:** Gzip/Brotli payload compression enabled on the backend.
-4. **Vite Rolldown Tree-Shaking:** Client bundled into static assets with SVG-based vector charting to eliminate heavy canvas dependencies.
-5. **Strict Type Safety:** End-to-end TypeScript interfaces shared across controller responses and UI state.
+Implemented in PostgreSQL with indexed foreign keys and connection pooling (`pg.Pool`):
+
+```sql
+-- 1. Parties Master
+polintel_parties (id, party_code, party_name, founded_year, abbrev, alliance, primary_color)
+
+-- 2. Parliamentary Constituencies
+polintel_parliamentary_constituencies (id, pc_no, pc_name, state, district, total_assembly_segments, category)
+
+-- 3. Assembly Constituencies (7 Segments)
+polintel_assembly_segments (id, pc_id, ac_no, ac_name, electors_2024, turnout_2024, aimim_votes_2024, bjp_votes_2024, inc_votes_2024, leading_party_2024, lead_margin_2024, winner_assembly_2023, party_assembly_2023, assembly_margin_2023, dominant_community, strategic_status)
+
+-- 4. Parliamentary Elections
+polintel_elections (id, pc_id, year, election_date, counting_date, total_electors, total_votes_polled, voter_turnout_percent, winning_margin, winning_margin_percent, nota_votes, nota_percent, winner_party)
+
+-- 5. Candidate Results
+polintel_candidate_results (id, election_id, candidate_name, party, evm_votes, postal_votes, total_votes, vote_share_percent, position, is_winner)
+
+-- 6. Demographics Profile
+polintel_demographics (id, pc_id, census_year, total_population, male_population, female_population, sex_ratio, population_density_per_sq_km, literacy_rate, male_literacy, female_literacy, religious_composition, social_category_composition)
+
+-- 7. Intelligence Insights & Findings
+polintel_insights (id, pc_id, title, observation, type, source)
+```
+
+---
+
+## 7. Data Processing Workflow & ETL
+
+1. **Extraction:** Raw ECI Form 20 and Census statistical documents collected into `data/raw/`.
+2. **Cleaning & Transformation:** Python script `scripts/etl/clean_and_export.py` using Pandas cleans column formatting, parses integers, strips trailing whitespaces, and standardizes party nomenclature.
+3. **Database Population:** `scripts/db/migrate_and_seed.py` creates tables, constraints, and inserts audited datasets into PostgreSQL.
+
+---
+
+## 8. Security Measures
+
+- **Parameterized SQL Queries:** Protects against SQL Injection through parameterized queries (`$1, $2`).
+- **HTTP Header Hardening:** `helmet` applies strict Content-Security-Policy (CSP) and HSTS.
+- **Volumetric Throttling:** Rate limiter prevents brute force and DoS vulnerabilities.
+- **Input Validation:** Route query params (`?year=`) sanitized before database execution.
+
+---
+
+## 9. Performance Optimization Techniques
+
+- **Vector SVG Rendering:** SVG-based charts prevent memory leaks associated with Canvas rendering.
+- **Pre-computed Aggregations:** Database queries leverage pre-calculated percentages rather than expensive run-time row scanning.
+- **Connection Pooling:** `pg.Pool` maintains warm database connections with 5s timeout limits.
+- **Tree-Shaking:** Vite bundles only used Lucide icons and Recharts primitives, minimizing bundle footprint.
+
+---
+
+## 10. Scalability Considerations
+
+- **Multi-Constituency Scalability:** The database schema is fully normalized around `pc_id`. Adding any new Lok Sabha constituency (e.g., Secunderabad, Chevella, Malkajgiri) requires only a single new row in `polintel_parliamentary_constituencies` and corresponding election records.
+- **Stateless Serverless Execution:** Express controllers and Vercel functions are 100% stateless, allowing infinite horizontal scaling across cloud edge instances.
+- **Microservice Decoupling:** The ETL pipeline, REST API, and Frontend operate as decoupled services communicating over standard JSON interfaces.
