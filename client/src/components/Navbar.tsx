@@ -59,12 +59,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className={`text-[10px] sm:text-[11px] font-sans font-bold px-2 py-0.5 rounded-full border ${
                 isDark 
                   ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' 
-                  : 'bg-blue-50 text-blue-700 border-blue-200'
+                  : 'bg-blue-50 text-blue-800 border-blue-300'
               }`}>
                 {yearMetadata[selectedYear]}
               </span>
             </div>
-            <span className={`text-[10px] sm:text-[11px] font-sans ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+            <span className={`text-[10px] sm:text-[11px] font-sans ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
               Parliamentary Constituency
             </span>
           </div>
@@ -127,11 +127,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-full text-xs font-sans font-medium border transition-colors cursor-pointer select-none ${
                     isActive
                       ? isDark 
-                        ? 'bg-white/10 text-white border-white/15 shadow-inner' 
-                        : 'bg-white text-blue-700 border-slate-200/90 shadow-xs'
+                        ? 'bg-white/10 text-white border-white/15 shadow-inner font-semibold' 
+                        : 'bg-white text-blue-700 border-slate-300 shadow-xs font-semibold'
                       : isDark 
                         ? 'text-slate-400 hover:text-white hover:bg-white/5 border-transparent' 
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-black/5 border-transparent'
+                        : 'text-slate-700 hover:text-slate-900 hover:bg-black/5 border-transparent'
                   }`}
                 >
                   <Icon className={`h-3.5 w-3.5 ${isActive ? (isDark ? 'text-blue-400' : 'text-blue-600') : 'text-slate-400'}`} />

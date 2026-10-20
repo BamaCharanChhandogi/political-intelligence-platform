@@ -24,13 +24,13 @@ interface AssemblyTabProps {
 export const AssemblyTab: React.FC<AssemblyTabProps> = ({ segments, selectedYear, isDark }) => {
   const [selectedSegment, setSelectedSegment] = useState<AssemblySegment>(segments[0]);
 
-  const cardBg = isDark ? 'bg-[#0F172A] border-slate-800' : 'bg-white border-slate-200 shadow-xs';
+  const cardBg = isDark ? 'bg-[#0F172A] border-slate-800' : 'bg-white border-slate-200 shadow-sm';
   const textPrimary = isDark ? 'text-white' : 'text-slate-900';
-  const textSecondary = isDark ? 'text-slate-400' : 'text-slate-600';
-  const textMuted = isDark ? 'text-slate-500' : 'text-slate-400';
+  const textSecondary = isDark ? 'text-slate-300' : 'text-slate-700';
+  const textMuted = isDark ? 'text-slate-400' : 'text-slate-500';
   const gridStroke = isDark ? '#1E293B' : '#E2E8F0';
   const tooltipBg = isDark ? '#090D16' : '#FFFFFF';
-  const tooltipBorder = isDark ? '#334155' : '#E2E8F0';
+  const tooltipBorder = isDark ? '#334155' : '#CBD5E1';
   const subCardBg = isDark ? 'bg-slate-900/60 border-slate-800' : 'bg-slate-50 border-slate-200';
 
   // Year-specific context mapping
@@ -214,7 +214,7 @@ export const AssemblyTab: React.FC<AssemblyTabProps> = ({ segments, selectedYear
                     {selectedSegment.ac_name} Assembly Segment
                   </h3>
                   <span className={`px-2 py-0.5 rounded text-xs font-sans font-bold border ${
-                    isDark ? 'bg-slate-800 text-slate-300 border-slate-700' : 'bg-slate-100 text-slate-700 border-slate-200'
+                    isDark ? 'bg-slate-800 text-slate-300 border-slate-700' : 'bg-slate-100 text-slate-800 border-slate-300'
                   }`}>
                     AC #{selectedSegment.ac_no}
                   </span>
@@ -225,34 +225,34 @@ export const AssemblyTab: React.FC<AssemblyTabProps> = ({ segments, selectedYear
               </div>
 
               <div className="text-right">
-                <span className={`text-xs font-sans uppercase font-medium ${textSecondary}`}>{selectedYear} LOK SABHA LEAD</span>
-                <div className="text-2xl font-extrabold font-sans tracking-tight tabular-nums text-emerald-500 mt-0.5">
+                <span className={`text-xs font-sans uppercase font-bold ${textSecondary}`}>{selectedYear} LOK SABHA LEAD</span>
+                <div className="text-2xl font-bold font-sans tracking-tight tabular-nums text-emerald-600 dark:text-emerald-400 mt-0.5">
                   +{Math.round(selectedSegment.lead_margin_2024 * mult).toLocaleString()}
                 </div>
-                <span className={`text-[11px] font-sans font-semibold ${textSecondary}`}>{selectedSegment.leading_party_2024}</span>
+                <span className={`text-[11px] font-sans font-bold ${textSecondary}`}>{selectedSegment.leading_party_2024}</span>
               </div>
             </div>
 
             {/* Quick Metrics Matrix */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 my-5">
               <div className={`p-3.5 rounded-xl border ${subCardBg}`}>
-                <span className={`text-[10px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>Segment Electors ({selectedYear})</span>
-                <div className={`text-xl font-extrabold font-sans tracking-tight tabular-nums mt-1 ${textPrimary}`}>
+                <span className={`text-[10px] font-sans font-bold uppercase tracking-wider ${textSecondary}`}>Segment Electors ({selectedYear})</span>
+                <div className={`text-xl font-bold font-sans tracking-tight tabular-nums mt-1 ${textPrimary}`}>
                   {Math.round(selectedSegment.electors * mult).toLocaleString()}
                 </div>
               </div>
               <div className={`p-3.5 rounded-xl border ${subCardBg}`}>
-                <span className={`text-[10px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>Turnout Rate</span>
-                <div className="text-xl font-extrabold font-sans tracking-tight tabular-nums text-purple-500 mt-1">
+                <span className={`text-[10px] font-sans font-bold uppercase tracking-wider ${textSecondary}`}>Turnout Rate</span>
+                <div className="text-xl font-bold font-sans tracking-tight tabular-nums text-purple-600 dark:text-purple-400 mt-1">
                   {selectedSegment.turnout_2024}%
                 </div>
               </div>
               <div className={`p-3.5 rounded-xl border col-span-2 sm:col-span-1 ${subCardBg}`}>
-                <span className={`text-[10px] font-sans font-semibold uppercase tracking-wider ${textSecondary}`}>Assembly Winner</span>
+                <span className={`text-[10px] font-sans font-bold uppercase tracking-wider ${textSecondary}`}>Assembly Winner</span>
                 <div className={`text-sm font-bold font-sans mt-1 truncate ${textPrimary}`}>
                   {selectedSegment.winner_assembly_2023}
                 </div>
-                <span className="text-[11px] font-sans font-semibold text-emerald-500">
+                <span className="text-[11px] font-sans font-bold text-emerald-600 dark:text-emerald-400">
                   {selectedSegment.party_assembly_2023} (+{selectedSegment.assembly_margin_2023.toLocaleString()})
                 </span>
               </div>
@@ -260,8 +260,8 @@ export const AssemblyTab: React.FC<AssemblyTabProps> = ({ segments, selectedYear
 
             {/* Qualitative Strategic Insights Box */}
             <div className="space-y-4">
-              <div className={`border p-4 rounded-lg ${subCardBg}`}>
-                <div className="text-xs font-semibold text-blue-500 uppercase tracking-wider mb-1 flex items-center space-x-1.5 font-sans">
+              <div className={`border p-4 rounded-xl ${subCardBg}`}>
+                <div className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-1 flex items-center space-x-1.5 font-sans">
                   <MapPin className="h-3.5 w-3.5" />
                   <span>Demographic Composition</span>
                 </div>
@@ -270,8 +270,8 @@ export const AssemblyTab: React.FC<AssemblyTabProps> = ({ segments, selectedYear
                 </p>
               </div>
 
-              <div className={`border p-4 rounded-lg ${subCardBg}`}>
-                <div className="text-xs font-semibold text-amber-500 uppercase tracking-wider mb-1 flex items-center space-x-1.5 font-sans">
+              <div className={`border p-4 rounded-xl ${subCardBg}`}>
+                <div className="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-1 flex items-center space-x-1.5 font-sans">
                   <TrendingUp className="h-3.5 w-3.5" />
                   <span>Strategic Intelligence Status</span>
                 </div>
@@ -283,7 +283,7 @@ export const AssemblyTab: React.FC<AssemblyTabProps> = ({ segments, selectedYear
           </div>
 
           <div className={`mt-6 pt-4 border-t flex items-center justify-between text-[11px] font-sans ${
-            isDark ? 'border-slate-800 text-slate-500' : 'border-slate-100 text-slate-500'
+            isDark ? 'border-slate-800 text-slate-400' : 'border-slate-200 text-slate-600'
           }`}>
             <span>Historical ECI Form 20 Audited</span>
             <span>Election Cycle: {selectedYear} Parliamentary</span>

@@ -38,12 +38,13 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
   selectedYear,
   isDark 
 }) => {
-  const cardBg = isDark ? 'bg-[#0F172A] border-slate-800' : 'bg-white border-slate-200 shadow-xs';
+  const cardBg = isDark ? 'bg-[#0F172A] border-slate-800' : 'bg-white border-slate-200 shadow-sm';
   const textPrimary = isDark ? 'text-white' : 'text-slate-900';
-  const textSecondary = isDark ? 'text-slate-400' : 'text-slate-600';
+  const textSecondary = isDark ? 'text-slate-300' : 'text-slate-700';
+  const textMuted = isDark ? 'text-slate-400' : 'text-slate-500';
   const gridStroke = isDark ? '#1E293B' : '#E2E8F0';
   const tooltipBg = isDark ? '#090D16' : '#FFFFFF';
-  const tooltipBorder = isDark ? '#334155' : '#E2E8F0';
+  const tooltipBorder = isDark ? '#334155' : '#CBD5E1';
   const subCardBg = isDark ? 'bg-slate-900/60 border-slate-800/80' : 'bg-slate-50 border-slate-200';
 
   // Elector projections mapped per election cycle
@@ -82,19 +83,19 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
                 Constituency Demographic Baseline & Strategic Analysis
               </h2>
               <span className={`px-2 py-0.5 rounded text-[10px] font-sans font-bold border ${
-                isDark ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-blue-50 text-blue-700 border-blue-200'
+                isDark ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 'bg-blue-100 text-blue-800 border-blue-300'
               }`}>
                 CENSUS 2011 BASELINE
               </span>
             </div>
             <p className={`text-xs font-sans mt-1 ${textSecondary}`}>
-              Official Primary Census Abstract for {demographics.district} District • Projected Registered Electors ({selectedYear}): <span className="font-sans font-bold text-blue-500 tabular-nums">{activeElectorate.toLocaleString()}</span>
+              Official Primary Census Abstract for {demographics.district} District • Projected Registered Electors ({selectedYear}): <span className="font-sans font-bold text-blue-600 dark:text-blue-400 tabular-nums">{activeElectorate.toLocaleString()}</span>
             </p>
           </div>
 
           <div className="flex items-center space-x-2 text-xs font-sans">
-            <span className={`px-2.5 py-1 rounded-lg border font-medium ${
-              isDark ? 'bg-slate-900 border-slate-800 text-slate-300' : 'bg-slate-100 border-slate-200 text-slate-700'
+            <span className={`px-2.5 py-1 rounded-lg border font-semibold ${
+              isDark ? 'bg-slate-900 border-slate-800 text-slate-300' : 'bg-slate-100 border-slate-300 text-slate-800'
             }`}>
               100% Urban Agglomeration
             </span>
@@ -102,58 +103,58 @@ export const DemographicsTab: React.FC<DemographicsTabProps> = ({
         </div>
       </div>
 
-      {/* Primary Demographic Metric Cards */}
+      {/* Primary Demographic Metric Cards (ECI-Style Frames) */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className={`border rounded-xl p-4 transition-colors ${cardBg}`}>
-          <div className={`flex items-center justify-between ${textSecondary} text-xs font-sans font-semibold uppercase`}>
+        <div className={`border border-l-4 border-l-blue-600 rounded-xl p-4 transition-colors ${cardBg}`}>
+          <div className={`flex items-center justify-between ${textSecondary} text-xs font-sans font-bold uppercase`}>
             <span>Census Population</span>
             <Users className="h-4 w-4 text-blue-500" />
           </div>
-          <div className={`text-2xl font-extrabold font-sans tracking-tight tabular-nums mt-2 ${textPrimary}`}>
+          <div className={`text-2xl font-bold font-sans tracking-tight tabular-nums mt-2 ${textPrimary}`}>
             {demographics.total_population.toLocaleString()}
           </div>
-          <div className={`text-[11px] font-sans ${textSecondary} mt-1 flex justify-between`}>
+          <div className={`text-[11px] font-sans font-medium ${textSecondary} mt-1 flex justify-between`}>
             <span>Male: 51.2%</span>
             <span>Female: 48.8%</span>
           </div>
         </div>
 
-        <div className={`border rounded-xl p-4 transition-colors ${cardBg}`}>
-          <div className={`flex items-center justify-between ${textSecondary} text-xs font-sans font-semibold uppercase`}>
+        <div className={`border border-l-4 border-l-emerald-600 rounded-xl p-4 transition-colors ${cardBg}`}>
+          <div className={`flex items-center justify-between ${textSecondary} text-xs font-sans font-bold uppercase`}>
             <span>Literacy Rate</span>
             <BookOpen className="h-4 w-4 text-emerald-500" />
           </div>
-          <div className="text-2xl font-extrabold font-sans tracking-tight tabular-nums text-emerald-500 mt-2">
+          <div className="text-2xl font-bold font-sans tracking-tight tabular-nums text-emerald-600 dark:text-emerald-400 mt-2">
             {demographics.literacy_rate}%
           </div>
-          <div className={`text-[11px] font-sans ${textSecondary} mt-1 flex justify-between`}>
+          <div className={`text-[11px] font-sans font-medium ${textSecondary} mt-1 flex justify-between`}>
             <span>Male: {demographics.male_literacy}%</span>
             <span>Female: {demographics.female_literacy}%</span>
           </div>
         </div>
 
-        <div className={`border rounded-xl p-4 transition-colors ${cardBg}`}>
-          <div className={`flex items-center justify-between ${textSecondary} text-xs font-sans font-semibold uppercase`}>
+        <div className={`border border-l-4 border-l-purple-600 rounded-xl p-4 transition-colors ${cardBg}`}>
+          <div className={`flex items-center justify-between ${textSecondary} text-xs font-sans font-bold uppercase`}>
             <span>Sex Ratio</span>
             <HeartHandshake className="h-4 w-4 text-purple-500" />
           </div>
-          <div className="text-2xl font-extrabold font-sans tracking-tight tabular-nums text-purple-500 mt-2">
+          <div className="text-2xl font-bold font-sans tracking-tight tabular-nums text-purple-600 dark:text-purple-400 mt-2">
             {demographics.sex_ratio}
           </div>
-          <div className={`text-[11px] font-sans ${textSecondary} mt-1`}>
+          <div className={`text-[11px] font-sans font-medium ${textSecondary} mt-1`}>
             Females per 1,000 Males
           </div>
         </div>
 
-        <div className={`border rounded-xl p-4 transition-colors ${cardBg}`}>
-          <div className={`flex items-center justify-between ${textSecondary} text-xs font-sans font-semibold uppercase`}>
+        <div className={`border border-l-4 border-l-amber-600 rounded-xl p-4 transition-colors ${cardBg}`}>
+          <div className={`flex items-center justify-between ${textSecondary} text-xs font-sans font-bold uppercase`}>
             <span>Density (per km²)</span>
             <Building className="h-4 w-4 text-amber-500" />
           </div>
-          <div className="text-2xl font-extrabold font-sans tracking-tight tabular-nums text-amber-500 mt-2">
+          <div className="text-2xl font-bold font-sans tracking-tight tabular-nums text-amber-600 dark:text-amber-400 mt-2">
             {demographics.population_density_per_sq_km.toLocaleString()}
           </div>
-          <div className={`text-[11px] font-sans ${textSecondary} mt-1`}>
+          <div className={`text-[11px] font-sans font-medium ${textSecondary} mt-1`}>
             Ultra-dense urban core
           </div>
         </div>
