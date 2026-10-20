@@ -44,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-50 py-2.5 sm:py-3.5 px-3 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 py-2.5 sm:py-3.5 px-3 sm:px-6 lg:px-8 print:hidden">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
         
         {/* LEFT: Clean Minimalist Title "Hyderabad • 18th Lok Sabha" */}

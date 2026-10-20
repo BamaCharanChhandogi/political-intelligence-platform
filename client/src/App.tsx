@@ -96,6 +96,31 @@ export function App() {
         setIsDark={setIsDark}
       />
 
+      {/* Official Government / Executive Dossier Header (Only visible in Print & PDF Export) */}
+      <div className="hidden print:block max-w-7xl w-full mx-auto px-4 pt-6 pb-4 mb-4 border-b-2 border-slate-900">
+        <div className="flex items-start justify-between">
+          <div>
+            <div className="text-[11px] font-bold uppercase tracking-widest text-slate-700">
+              Official Electoral Intelligence Dossier
+            </div>
+            <h1 className="text-2xl font-black text-slate-950 mt-0.5 tracking-tight">
+              Hyderabad Parliamentary Constituency (PC-09)
+            </h1>
+            <p className="text-xs text-slate-700 mt-1 font-medium">
+              Prepared for Corporate Chanakya • Baseline: Election Commission of India & Census Directorate
+            </p>
+          </div>
+          <div className="text-right">
+            <span className="inline-block px-3 py-1 bg-slate-100 border border-slate-400 text-xs font-bold text-slate-900 rounded">
+              {selectedYear} Lok Sabha Cycle
+            </span>
+            <p className="text-[10px] text-slate-600 mt-1 font-mono">
+              CONFIDENTIAL BRIEFING
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Main Dashboard Content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {activeTab === 'overview' && (

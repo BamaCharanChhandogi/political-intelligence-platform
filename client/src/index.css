@@ -22,6 +22,9 @@ html {
 body {
   font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   letter-spacing: -0.011em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 html.dark body {
@@ -48,4 +51,120 @@ html:not(.dark) body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #475569;
+}
+
+/* ==========================================================================
+   OFFICIAL EXECUTIVE DOSSIER PRINT & PDF ENGINE STYLES
+   Ensures 100% vector-crisp typography, zero cut-off, and high contrast in PDF
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm 10mm 12mm 10mm;
+  }
+
+  *, *::before, *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  html, body, #root {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    scrollbar-gutter: auto !important;
+    background: #ffffff !important;
+    color: #020617 !important;
+    font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    -webkit-font-smoothing: antialiased !important;
+  }
+
+  main {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Hide interactive web chrome, scrollbars, and buttons */
+  header,
+  nav,
+  button,
+  .print\:hidden,
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* Deep high-contrast headings */
+  h1, h2, h3, h4, h5, h6 {
+    color: #020617 !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  /* All numbers, metrics, and KPI cards rendered in deep solid ink */
+  .tabular-nums, 
+  [class*="text-2xl"], 
+  [class*="text-3xl"], 
+  [class*="text-4xl"] {
+    color: #020617 !important;
+    font-weight: 800 !important;
+  }
+
+  /* Force muted/slate text to rich, readable dark charcoal instead of washed-out gray */
+  p, span, div,
+  .text-slate-400,
+  .text-slate-500,
+  .text-slate-600,
+  .text-slate-700,
+  .text-slate-300,
+  .text-gray-400,
+  .text-gray-500 {
+    color: #1e293b !important;
+    font-weight: 500 !important;
+  }
+
+  /* Cards in print */
+  .rounded-xl, .rounded-2xl, .rounded-lg {
+    border: 1px solid #94a3b8 !important;
+    background-color: #ffffff !important;
+    box-shadow: none !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin-bottom: 14px !important;
+  }
+
+  /* Top card accent line */
+  .h-1 {
+    height: 3px !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Chart SVGs fit printable page width without clipping */
+  svg, .recharts-responsive-container, .recharts-wrapper {
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Prevent page breaks across table rows and grid items */
+  tr, .grid > div {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Footer styling for official printed document */
+  footer {
+    border-top: 1px solid #94a3b8 !important;
+    background: transparent !important;
+    padding-top: 8px !important;
+    margin-top: 16px !important;
+  }
 }
