@@ -35,7 +35,7 @@ The **Political Intelligence Platform** is built to equip election strategists, 
 - **Assembly Constituencies Retrospective Analysis:** Granular segment-by-segment audit of all 7 Vidhan Sabha seats (*Malakpet, Karwan, Goshamahal, Charminar, Chandrayangutta, Yakutpura, Bahadurpura*) cross-referencing 2024 Lok Sabha leads with 2023 Telangana State Assembly outcomes.
 - **Demographic & Socio-Economic Profiling:** Official Census of India breakdown covering religion, social categories (General/Minority/SC/ST), literacy gender parity, and urban density.
 - **Strategic Political Intelligence & Swing Analysis:** Multi-election swing matrix, Old City turnout asymmetry analysis, Goshamahal anomaly audit, and third-pole (BRS/Congress) attrition dynamics.
-- **Elite Modern UI/UX:** Dual theme support (War Room Obsidian `#090D16` and Institutional Light `#F8FAFC`), Geist Sans typography, Recharts SVG graphics, and responsive mobile/tablet/desktop layouts.
+- **Elite Modern UI/UX:** Dual theme support (War Room Obsidian `#090D16` and Institutional Light `#F8FAFC`), official government-standard Noto Sans typography, Recharts SVG graphics, and responsive mobile/tablet/desktop layouts.
 
 ---
 
