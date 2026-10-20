@@ -24,6 +24,7 @@ import {
 export function App() {
   const [activeTab, setActiveTab] = useState<string>('overview');
   const [selectedYear, setSelectedYear] = useState<number>(2024);
+  const [isDark, setIsDark] = useState<boolean>(true);
 
   // States with fallback initialization
   const [elections, setElections] = useState<ParliamentaryElection[]>(fallbackElections as ParliamentaryElection[]);
@@ -32,6 +33,7 @@ export function App() {
   const [insights, setInsights] = useState<IntelligenceInsight[]>(fallbackInsights.key_findings as IntelligenceInsight[]);
   const [swings, setSwings] = useState<SwingData[]>(fallbackInsights.swing_analysis as SwingData[]);
   const [apiConnected, setApiConnected] = useState<boolean>(false);
+  const [dataSource, setDataSource] = useState<string>('Connecting...');
 
   // Attempt to fetch from backend API if active, fallback seamlessly if static
   useEffect(() => {
@@ -47,6 +49,7 @@ export function App() {
         if (resElections?.data?.data) {
           setElections(resElections.data.data);
           setApiConnected(true);
+          setDataSource(resElections.data.source || 'Cloud API');
         }
         if (resSegments?.data?.data?.segments) {
           setAssemblySegments(resSegments.data.data.segments);
@@ -59,7 +62,6 @@ export function App() {
           setSwings(resInsights.data.data.swing_analysis);
         }
       } catch (err) {
-        // Fallback remains active
         console.log('Operating in high-availability embedded mode');
       }
     };
@@ -70,14 +72,18 @@ export function App() {
   const currentElection = elections.find(e => e.year === selectedYear) || elections[0];
 
   return (
-    <div className="min-h-screen bg-[#090D16] text-slate-100 flex flex-col font-sans">
+    <div className={`min-h-screen transition-colors flex flex-col font-sans ${
+      isDark ? 'bg-[#090D16] text-slate-100' : 'bg-[#F8FAFC] text-slate-900'
+    }`}>
       
-      {/* Top Navigation Bar */}
+      {/* Top Navigation Bar with Dark/Light Toggle */}
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         selectedYear={selectedYear}
         setSelectedYear={setSelectedYear}
+        isDark={isDark}
+        setIsDark={setIsDark}
       />
 
       {/* Main Dashboard Content */}
@@ -88,6 +94,7 @@ export function App() {
             historicalElections={elections}
             assemblySegments={assemblySegments}
             onSelectYear={setSelectedYear}
+            isDark={isDark}
           />
         )}
 
@@ -120,18 +127,22 @@ export function App() {
       </main>
 
       {/* Corporate Chanakya Footer */}
-      <footer className="border-t border-slate-800/80 bg-[#090D16] py-6 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-mono gap-3">
+      <footer className={`border-t py-6 mt-12 transition-colors ${
+        isDark ? 'border-slate-800/80 bg-[#090D16] text-slate-500' : 'border-slate-200 bg-white text-slate-600'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs font-sans gap-3">
           <div className="flex items-center space-x-2">
-            <span className="font-semibold text-slate-300">Corporate Chanakya Political Intelligence Platform</span>
+            <span className={`font-semibold ${isDark ? 'text-slate-300' : 'text-slate-800'}`}>
+              Corporate Chanakya Political Intelligence Platform
+            </span>
             <span>•</span>
             <span>Hyderabad Parliamentary Constituency Technical Assignment</span>
           </div>
-          <div className="flex items-center space-x-3 text-slate-400">
+          <div className="flex items-center space-x-3">
             <span>Sources: ECI Statistical Reports | Census of India</span>
             <span>•</span>
-            <span className={apiConnected ? 'text-emerald-400' : 'text-blue-400'}>
-              {apiConnected ? '● LIVE REST API' : '● HYBRID RUNTIME READY'}
+            <span className={`font-mono ${apiConnected ? 'text-emerald-500 font-medium' : 'text-blue-500'}`}>
+              {apiConnected ? `● ${dataSource}` : '● HIGH-AVAILABILITY RUNTIME'}
             </span>
           </div>
         </div>
